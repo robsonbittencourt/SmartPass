@@ -17,18 +17,15 @@
 
 		<legend>Verifique a força de sua senha</legend>
 
-		<form method="post" action="strongPassword" class="form-inline" role="form">
+		<form method="post" action="strongPassword" class="form-inline">
     		<label class="control-label" for="password_id">Senha</label>
 			<div class="form-group has-feedback">
-    			<input type="text" class="form-control" id="password_id" name="password" placeholder="Entre com sua senha">
+    			<input type="password" name="password.password" value="${password.password}" class="form-control" id="password_id" placeholder="${password.status}">
     			<span class="glyphicon form-control-feedback"></span>
   			</div>	
   			<button type="submit" class="btn btn-primary">Verificar</button>
   		</form>	
-  		</br>
-  		<div class="text-center">
-  			${passwordMessage}
-		</div>		
+  		
 	</div>
 </body>
 
@@ -37,15 +34,15 @@
 	$(function() {
 				
 		<c:choose>
-        	<c:when test="${passwordStatus == 1}">
+        	<c:when test="${password.status eq 'Senha forte'}">
         		$(".form-group").addClass("has-success");
         		$(".glyphicon").addClass("glyphicon-ok");
         	</c:when>
-        	<c:when test="${passwordStatus == 2}">
+        	<c:when test="${password.status eq 'Senha média'}">
 	        	$(".form-group").addClass("has-warning");
 	    		$(".glyphicon").addClass("glyphicon-warning-sign");
         	</c:when>
-        	<c:when test="${passwordStatus == 3}">
+        	<c:when test="${password.status eq 'Senha fraca'}">
         		$(".form-group").addClass("has-error");
     			$(".glyphicon").addClass("glyphicon-remove");
     		</c:when>
