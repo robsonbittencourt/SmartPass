@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c"       uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
 <!DOCTYPE html>
@@ -17,20 +17,53 @@
 
 		<legend>Gerenciamento de senhas</legend>
 
-		<form method="post" action="managePassword/save" class="form-inline">
-    		<div class="form-group has-feedback">
-    			<label class="control-label" for="password_id">Sistema</label>
-    			<input type="text" name="randomPassword" value="${randomPassword}" class="form-control" id="password_id" placeholder="Clique no botão">
-	    		<div style="clear:both" />
-	    		<label class="control-label" for="password_id">Usuário</label>
-    			<input type="text" name="randomPassword" value="${randomPassword}" class="form-control" id="password_id" placeholder="Clique no botão">
-    			<div style="clear:both" />
-    			<label class="control-label" for="password_id">Senha</label>
-    			<input type="text" name="randomPassword" value="${randomPassword}" class="form-control" id="password_id" placeholder="Clique no botão">
-  			</div>	
-  			<button type="submit" class="btn btn-primary">Salvar</button>
+		<form method="post" action="managePassword/save" class="form-horizontal" role="form">
+    			<div class="form-group">
+    				<label class="col-sm-2 control-label" for="password_id">Sistema</label>
+    				<div class="col-sm-10">
+	    				<input type="text" name="randomPassword" value="${randomPassword}" class="form-control" id="password_id">
+    				</div>
+    			</div>
+	    		
+	    		<div class="form-group">
+	    			<label class="col-sm-2 control-label" for="password_id">Usuário</label>
+    				<div class="col-sm-10">
+    					<input type="text" name="randomPassword" value="${randomPassword}" class="form-control" id="password_id">
+    				</div>
+    			</div>
+    			
+    			<div class="form-group">
+   					<label class="col-sm-2 control-label" for="password_id">Senha</label>
+    				<div class="col-sm-10">
+	    				<input type="text" name="randomPassword" value="${randomPassword}" class="form-control" id="password_id">
+    				</div>
+    			</div>
+  				<div class="form-group">
+    				<div class="col-sm-offset-0 col-sm-5">
+      					<button type="submit" class="btn btn-default">Salvar</button>
+    				</div>
+  				</div>
   		</form>	
   		
+  		<table class="table table-striped">
+  			<tr>
+      				<td>Sistema</td>
+      				<td>Usuário</td>
+      				<td>Senha</td>
+    		</tr>
+  			<c:forEach items="${list}" var="item">
+   				<tr>
+      				<td>${item}</td>
+      				<td>${item}</td>
+      				<td>${item}</td>
+      				<td>
+      					<button type="button" class="btn btn-info">Editar</button>
+      					<button type="button" class="btn btn-danger">Excluir</button>
+      				</td>
+      				
+    			</tr>
+  			</c:forEach>
+		</table>  				
 	</div>
 		
 </body>
