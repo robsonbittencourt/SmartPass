@@ -21,7 +21,6 @@ public class StrongPasswordController {
 	@Get("/strongPassword")
 	public void strongPassword() {
 		Password password = new Password();
-		password.setStatus("Digite sua senha");
 		result.include(password);
 	}
 	

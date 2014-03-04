@@ -20,7 +20,7 @@
 		<form method="post" action="strongPassword" class="form-inline">
     		<label class="control-label" for="password_id">Senha</label>
 			<div class="form-group has-feedback">
-    			<input type="password" name="password.password" value="${password.password}" class="form-control" id="password_id" placeholder="${password.status}">
+    			<input type="password" name="password.password" value="${password.password}" class="form-control" id="password_id" placeholder="Digite sua senha">
     			<span class="glyphicon form-control-feedback"></span>
   			</div>	
   			<button type="submit" class="btn btn-primary">Verificar</button>
