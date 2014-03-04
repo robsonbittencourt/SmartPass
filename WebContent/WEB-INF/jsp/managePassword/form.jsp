@@ -17,7 +17,7 @@
 
 		<legend>Gerenciamento de senhas</legend>
 
-		<form method="post" action="managePassword/save" class="form-horizontal" role="form">
+		<form method="post" action="/SmartPass/managePassword/save" class="form-horizontal" role="form">
     			<div class="form-group">
     				<label class="col-sm-2 control-label" for="password_id">Sistema</label>
     				<div class="col-sm-10">
@@ -51,16 +51,19 @@
       				<td>Usuário</td>
       				<td>Senha</td>
     		</tr>
-  			<c:forEach items="${list}" var="item">
+  			<c:forEach items="${credentialList}" var="credential">
    				<tr>
-      				<td>${item}</td>
-      				<td>${item}</td>
-      				<td>${item}</td>
+      				<td>${credential.system}</td>
+      				<td>${credential.user}</td>
+      				<td>${credential.password.password}</td>
       				<td>
-      					<button type="button" class="btn btn-info">Editar</button>
-      					<button type="button" class="btn btn-danger">Excluir</button>
+      					<a href="/SmartPass/managePassword/edit/${credential.id}">
+      						<button type="button" class="btn btn-info" >Editar</button>
+      					</a>
+      					<a href="/SmartPass/managePassword/delete/${credential.id}">
+      						<button type="button" class="btn btn-danger">Excluir</button>
+      					</a>
       				</td>
-      				
     			</tr>
   			</c:forEach>
 		</table>  				
