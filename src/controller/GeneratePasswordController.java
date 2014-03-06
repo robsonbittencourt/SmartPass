@@ -18,14 +18,14 @@ public class GeneratePasswordController {
 	@Inject
 	private GeneratePasswordService service;
 	
-	@Get("/randomPassword")
-	public void randomPassword() {
+	@Get("/generatePassword")
+	public void generatePassword() {
 		
 	}
 	
-	@Post("/randomPassword")
+	@Post("/generatePassword")
 	public void generate() {
 		result.include("randomPassword", service.generateRandomStrongPassword());
-		result.forwardTo(this).randomPassword();
+		result.forwardTo(this).generatePassword();
 	}
 }

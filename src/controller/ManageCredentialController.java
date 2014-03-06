@@ -2,6 +2,7 @@ package controller;
 
 import model.Credential;
 import model.Password;
+import service.CredentialService;
 import service.PasswordService;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
