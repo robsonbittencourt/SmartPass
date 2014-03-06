@@ -31,7 +31,4 @@ public class Password {
 		this.status = status;
 	}
 	
-	
-
-	
 }

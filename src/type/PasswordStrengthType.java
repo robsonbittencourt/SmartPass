@@ -1,7 +1,7 @@
 package type;
 
 
-public enum PasswordStreghtType {
+public enum PasswordStrengthType {
 	
 	STRONG("Senha forte"),
 	MEDIUM("Senha média"),
@@ -9,7 +9,7 @@ public enum PasswordStreghtType {
 	
 	private String messageStatus;
 	
-	private PasswordStreghtType(String messageStatus){
+	private PasswordStrengthType(String messageStatus){
 		this.messageStatus = messageStatus;
 	}
 	

@@ -17,10 +17,10 @@
 
 		<legend>Verifique a força de sua senha</legend>
 
-		<form method="post" action="strongPassword" class="form-inline">
+		<form method="post" action="passwordStrength" class="form-inline" enctype="multipart/form-data">
     		<label class="control-label" for="password_id">Senha</label>
 			<div class="form-group has-feedback">
-    			<input type="password" name="password.password" value="${password.password}" class="form-control" id="password_id" placeholder="Digite sua senha">
+    			<input type="password" name="password.password" class="form-control" id="password_id" placeholder="${password.status}">
     			<span class="glyphicon form-control-feedback"></span>
   			</div>	
   			<button type="submit" class="btn btn-primary">Verificar</button>

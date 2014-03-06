@@ -1,23 +1,15 @@
 package service;
 
-import static type.PasswordStreghtType.MEDIUM;
-import static type.PasswordStreghtType.STRONG;
-import static type.PasswordStreghtType.WEAK;
-
-import java.util.Random;
-
-import type.PasswordStreghtType;
+import static type.PasswordStrengthType.MEDIUM;
+import static type.PasswordStrengthType.STRONG;
+import static type.PasswordStrengthType.WEAK;
+import type.PasswordStrengthType;
 import br.com.caelum.vraptor.ioc.Component;
 
 @Component
-public class StrongPasswordService {
+public class PasswordStrengthService {
 	
-	
-	public String generateRandomStrongPassword() {
-		return "nwjh8wubc4huu2wsch6nnxk";
-	}
-	
-	public PasswordStreghtType verifyPasswordStrenght(String password) {
+	public PasswordStrengthType verifyPasswordStrenght(String password) {
 		if (isStrongPassword(password))
 			return STRONG;
 		if(isMediumPassword(password))

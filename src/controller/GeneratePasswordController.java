@@ -1,6 +1,7 @@
 package controller;
 
-import service.StrongPasswordService;
+import service.GeneratePasswordService;
+import service.PasswordStrengthService;
 
 import com.google.inject.Inject;
 
@@ -10,12 +11,12 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 
 @Resource
-public class RandomPasswordController {
+public class GeneratePasswordController {
 	
 	@Inject
 	private Result result;
 	@Inject
-	private StrongPasswordService service;
+	private GeneratePasswordService service;
 	
 	@Get("/randomPassword")
 	public void randomPassword() {
