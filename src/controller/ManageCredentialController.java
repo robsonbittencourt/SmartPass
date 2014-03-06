@@ -1,5 +1,6 @@
 package controller;
 
+import model.Credential;
 import model.Password;
 import service.PasswordService;
 import br.com.caelum.vraptor.Get;
@@ -10,7 +11,7 @@ import br.com.caelum.vraptor.Result;
 import com.google.inject.Inject;
 
 @Resource
-public class ManagePasswordController {
+public class ManageCredentialController {
 
 	@Inject
 	private Result result;
@@ -19,30 +20,30 @@ public class ManagePasswordController {
 	@Inject
 	private CredentialService credentialService;
 	
-	@Get("/managePassword")
+	@Get("/manageCredential")
 	public void managePassword() {
-		result.forwardTo(this).form(new Password());
+		result.forwardTo(this).form(new Credential());
 	}
 	
-	@Get("/managePassword/edit/{id}")
+	@Get("/manageCredential/edit/{id}")
 	public void edit(long id) {
-		result.forwardTo(this).form(passwordService.findById(id));
+		result.forwardTo(this).form(credentialService.findById(id));
 	}
 	
-	@Get("/managePassword/delete/{id}")
+	@Get("/manageCredential/delete/{id}")
 	public void delete(long id) {
 		credentialService.delete(id);
 		result.forwardTo(this).managePassword();
 	}
 	
-	@Post("/managePassword/save")
+	@Post("/manageCredential/save")
 	public void save(Password password) {
 		passwordService.save(password);
 		result.redirectTo(this).managePassword();
 	}
 	
-	public void form(Password password) {
-		result.include("password", password);
+	public void form(Credential credential) {
+		result.include("credential", credential);
 		result.include("credentialList", credentialService.getAllCredentials());
 	}
 

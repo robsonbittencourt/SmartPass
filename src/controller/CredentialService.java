@@ -9,6 +9,18 @@ import br.com.caelum.vraptor.ioc.Component;
 
 @Component
 public class CredentialService {
+	
+	public Credential findById(long id) {
+		Credential credential = new Credential();
+		Password password = new Password();
+		password.setPassword("123");
+		
+		credential.setId(1);
+		credential.setPassword(password);
+		credential.setSystem("Facebook");
+		credential.setUser("Peter");
+		return credential;
+	}
 
 	public List<Credential> getAllCredentials() {
 		Password password1 = new Password();
