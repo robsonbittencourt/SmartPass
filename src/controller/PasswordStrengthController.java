@@ -26,15 +26,8 @@ public class PasswordStrengthController {
 
 	@Post("/passwordStrength")
 	public void passwordStrength(Password password) {
-		PasswordStrengthType passwordStreght = service.verifyPasswordStrenght(password.getPassword());
+		PasswordStrengthType passwordStreght = service.verifyPasswordStrenght(password);
 		password.setStatus(passwordStreght.getMessageStatus());
-//		BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getFile()));
-//		try {
-//			System.out.println(reader.readLine());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		<input type="file" name="inputFile" />
 		result.include("password", password);
 	}
 }

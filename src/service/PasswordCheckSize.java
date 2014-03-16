@@ -3,7 +3,7 @@ package service;
 import model.Password;
 import static service.PasswordStrengthType.*;
 
-public class PasswordCheckSize {
+public class PasswordCheckSize implements PasswordCheck{
 
 	public PasswordStrengthType checkPassword(Password password) {
 		int passwordLength = password.getPassword().length();

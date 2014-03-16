@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import model.Password;
 import static service.PasswordStrengthType.*;
 
+public class PasswordCheckDictionary implements PasswordCheck {
 
-public class PasswordCheckDictionary {
-	
 	private ArrayList<String> dictionary = new ArrayList<String>();
-	
+
 	public PasswordCheckDictionary() {
 		dictionary.add("casa");
 	}
-	
+
 	public PasswordStrengthType checkPassword(Password password) {
-		if(existsInDictionary(password.getPassword()))
+		if (existsInDictionary(password.getPassword())) 
 			return WEAK;
 		else {
 			return STRONG;
@@ -25,7 +24,5 @@ public class PasswordCheckDictionary {
 	private boolean existsInDictionary(String password) {
 		return dictionary.contains(password);
 	}
-	
-	
 
 }

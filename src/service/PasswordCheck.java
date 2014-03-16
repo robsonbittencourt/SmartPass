@@ -5,6 +5,6 @@ import model.Password;
 
 public interface PasswordCheck {
 	
-	void checkPassword(Password password);
+	PasswordStrengthType checkPassword(Password password);
 	
 }
