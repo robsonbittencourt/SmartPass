@@ -1,38 +1,40 @@
 package service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static service.PasswordStrengthType.MEDIUM;
+import static service.PasswordStrengthType.STRONG;
+import static service.PasswordStrengthType.WEAK;
 import model.Password;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import static service.PasswordStrengthType.*;
-
 public class PasswordCheckSizeTest {
-
+	
+	private PasswordCheckSize checkSize;
+	private Password password;
+	
+	@Before
+	public void setUp() {
+		checkSize = new PasswordCheckSize();
+		password = new Password();
+	}
+	
 	@Test
 	public void shouldReturnWeakWhenPasswordLengthIsLessOfFour() {
-		PasswordCheckSize checkSize = new PasswordCheckSize();
-		Password password = new Password();
 		password.setPassword("123");
-		
-		assertEquals(checkSize.checkPassword(password), WEAK);
+		assertEquals(WEAK, checkSize.checkPassword(password));
 	}
 	
 	@Test
 	public void shouldReturnMediumWhenPasswordLengthIsBiggerToFourAndLessToEigth() {
-		PasswordCheckSize checkSize = new PasswordCheckSize();
-		Password password = new Password();
 		password.setPassword("12345");
-		
-		assertEquals(checkSize.checkPassword(password), MEDIUM);
+		assertEquals(MEDIUM, checkSize.checkPassword(password));
 	}
 	
 	@Test
 	public void shouldReturnStrongWhenPasswordLengthIsBiggerToSeven() {
-		PasswordCheckSize checkSize = new PasswordCheckSize();
-		Password password = new Password();
 		password.setPassword("12345678");
-		
-		assertEquals(checkSize.checkPassword(password), STRONG);
+		assertEquals(STRONG, checkSize.checkPassword(password));
 	}
 }
