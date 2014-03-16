@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info
+        organisation=""
+        module=""
+        status="integration">
+	</info>
+	
+	<dependencies>
+        <dependency org="br.com.caelum" name="vraptor" rev="3.5.1"/>
+        <dependency org="junit" name="junit" rev="4.11"/>
+        <dependency org="org.mockito" name="mockito-all" rev="1.9.5"/>
+    </dependencies>
+</ivy-module>

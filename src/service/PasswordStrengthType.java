@@ -1,4 +1,4 @@
-package type;
+package service;
 
 
 public enum PasswordStrengthType {
