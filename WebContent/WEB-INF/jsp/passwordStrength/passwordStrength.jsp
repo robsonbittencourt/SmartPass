@@ -1,5 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page contentType="text/html; charset=UTF-8"%>
 
 <!DOCTYPE html>
 
@@ -15,7 +15,7 @@
 <body>
 	<div class="book-form">
 
-		<legend>Verifique a forÃ§a de sua senha</legend>
+		<legend>Verifique a força de sua senha</legend>
 
 		<form method="post" action="passwordStrength" class="form-inline">
     		<label class="control-label" for="password_id">Senha</label>
@@ -38,7 +38,7 @@
         		$(".form-group").addClass("has-success");
         		$(".glyphicon").addClass("glyphicon-ok");
         	</c:when>
-        	<c:when test="${password.status eq 'Senha mÃ©dia'}">
+        	<c:when test="${password.status eq 'Senha média'}">
 	        	$(".form-group").addClass("has-warning");
 	    		$(".glyphicon").addClass("glyphicon-warning-sign");
         	</c:when>

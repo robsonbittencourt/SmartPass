@@ -1,5 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c"       uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8"%>
 
 <!DOCTYPE html>
 
@@ -26,7 +26,7 @@
     			</div>
 	    		
 	    		<div class="form-group">
-	    			<label class="col-sm-2 control-label" for="user_id">Usu√°rio</label>
+	    			<label class="col-sm-2 control-label" for="user_id">Usu·rio</label>
     				<div class="col-sm-10">
     					<input type="text" name="credential.user" value="${credential.user}" class="form-control" id="user_id">
     				</div>
@@ -48,7 +48,7 @@
   		<table class="table table-striped">
   			<tr>
       				<td>Sistema</td>
-      				<td>Usu√°rio</td>
+      				<td>Usu·rio</td>
       				<td>Senha</td>
     		</tr>
   			<c:forEach items="${credentialList}" var="credential">
