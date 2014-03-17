@@ -11,6 +11,7 @@ public class PasswordCheckDictionary implements PasswordCheck {
 
 	public PasswordCheckDictionary() {
 		dictionary.add("casa");
+		dictionary.add("pão");
 	}
 
 	public PasswordStrengthType checkPassword(Password password) {

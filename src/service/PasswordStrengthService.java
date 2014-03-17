@@ -8,13 +8,15 @@ import br.com.caelum.vraptor.ioc.Component;
 
 @Component
 public class PasswordStrengthService {
+	
+	private PasswordCheck checker;
 
 	public PasswordStrengthType verifyPasswordStrenght(Password password) {
 		applyPercentualStrong(password);
 		if (isWeakPassword(password)) return WEAK;
 		if (isMediumPassword(password)) return MEDIUM;
 		if (isStrongPassword(password)) return STRONG;
-		return null;
+		return WEAK;
 	}
 
 	public void applyPercentualStrong(Password password) {
@@ -23,7 +25,8 @@ public class PasswordStrengthService {
 	}
 
 	private void applyPercentualStrongByChecker(Password password, PasswordCheck checker, double percentual) {
-		if (checker.checkPassword(password).equals(WEAK)) password.setPercentualWeak(password.getPercentualWeak() + percentual);
+		this.checker = checker;
+		if (this.checker.checkPassword(password).equals(WEAK)) password.setPercentualWeak(password.getPercentualWeak() + percentual);
 		else if (checker.checkPassword(password).equals(MEDIUM)) password.setPercentualMedium(password.getPercentualMedium() + percentual);
 		else if (checker.checkPassword(password).equals(STRONG)) password.setPercentualStrong(password.getPercentualStrong() + percentual);
 	}
