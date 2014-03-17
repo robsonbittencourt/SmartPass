@@ -26,7 +26,7 @@ public class PasswordStrengthController {
 
 	@Post("/passwordStrength")
 	public void passwordStrength(Password password) {
-		PasswordStrengthType passwordStreght = service.verifyPasswordStrenght(password);
+		PasswordStrengthType passwordStreght = service.verifyPasswordStrenght(password, null);
 		password.setStatus(passwordStreght.getMessageStatus());
 		result.include("password", password);
 	}

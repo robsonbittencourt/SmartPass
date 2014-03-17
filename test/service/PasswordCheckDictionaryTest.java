@@ -15,7 +15,7 @@ public class PasswordCheckDictionaryTest {
 		PasswordCheckDictionary checkDictionary = new PasswordCheckDictionary();
 		Password password = new Password();
 		password.setPassword("casa");
-		assertEquals(WEAK, checkDictionary.checkPassword(password));
+		assertEquals(WEAK, checkDictionary.checkPasswordStrength(password));
 	}
 	
 	@Test
@@ -23,6 +23,6 @@ public class PasswordCheckDictionaryTest {
 		PasswordCheckDictionary checkDictionary = new PasswordCheckDictionary();
 		Password password = new Password();
 		password.setPassword("carro");
-		assertEquals(STRONG, checkDictionary.checkPassword(password));
+		assertEquals(STRONG, checkDictionary.checkPasswordStrength(password));
 	}
 }

@@ -23,18 +23,18 @@ public class PasswordCheckSizeTest {
 	@Test
 	public void shouldReturnWeakWhenPasswordLengthIsLessOfFour() {
 		password.setPassword("123");
-		assertEquals(WEAK, checkSize.checkPassword(password));
+		assertEquals(WEAK, checkSize.checkPasswordStrength(password));
 	}
 	
 	@Test
 	public void shouldReturnMediumWhenPasswordLengthIsBiggerToFourAndLessToEigth() {
 		password.setPassword("12345");
-		assertEquals(MEDIUM, checkSize.checkPassword(password));
+		assertEquals(MEDIUM, checkSize.checkPasswordStrength(password));
 	}
 	
 	@Test
 	public void shouldReturnStrongWhenPasswordLengthIsBiggerToSeven() {
 		password.setPassword("12345678");
-		assertEquals(STRONG, checkSize.checkPassword(password));
+		assertEquals(STRONG, checkSize.checkPasswordStrength(password));
 	}
 }

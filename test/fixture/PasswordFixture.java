@@ -18,17 +18,17 @@ public class PasswordFixture {
 	}
 	
 	public PasswordFixture withPercentualWeak(double percentualWeak) {
-		this.password.setPercentualWeak(percentualWeak);
+		this.password.setWeakWeight(percentualWeak);
 		return this;
 	}
 	
 	public PasswordFixture withPercentualMedium(double percentualMedium) {
-		this.password.setPercentualMedium(percentualMedium);
+		this.password.setMediumWeight(percentualMedium);
 		return this;
 	}
 	
 	public PasswordFixture withPercentualStrong(double percentualStrong) {
-		this.password.setPercentualStrong(percentualStrong);
+		this.password.setStrongWeigth(percentualStrong);
 		return this;
 	}
 

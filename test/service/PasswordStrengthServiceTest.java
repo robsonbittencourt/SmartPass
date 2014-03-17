@@ -9,6 +9,10 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import static service.PasswordStrengthType.MEDIUM;
 import static service.PasswordStrengthType.STRONG;
 import static service.PasswordStrengthType.WEAK;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Password;
 
 import org.junit.Before;
@@ -22,147 +26,162 @@ public class PasswordStrengthServiceTest {
 	
 	@InjectMocks
 	private PasswordStrengthService service;
-	private Password password;
 	@Mock
 	private PasswordCheckSize checkerSize;
 	@Mock
 	private PasswordCheckDictionary checkerDictionary;
 	
+	private Password password;
+	private List<PasswordCheck> checkers;
+	
 	@Before
 	public void setUp() {
 		initMocks(this);
+		checkers = new ArrayList<PasswordCheck>();
+		checkers.add(checkerDictionary);
+		checkers.add(checkerSize);
 	}
 	
 	@Test
-	public void shouldReturnTrueWhenPasswordWeakPercentualIsMoreSignificativeWithMediumAndStrongPercentuals() {
+	public void shouldReturnTrueWhenWeightWeakPasswordIsMoreSignificantThanWeightMediumAndWeightStrong() {
 		password = PasswordFixture.get().withPercentualWeak(50).withPercentualMedium(30).withPercentualStrong(20).build();
 		assertTrue(service.isWeakPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordWeakPercentualNotIsMoreSignificativeWithMediumAndStrongPercentuals() {
+	public void shouldReturnFalseWhenWeightWeakPasswordIsNotMoreSignificantThanWeightMediumAndWeightStrong() {
 		password = PasswordFixture.get().withPercentualWeak(20).withPercentualMedium(50).withPercentualStrong(30).build();
 		assertFalse(service.isWeakPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordWeakPercentualIsMoreSignificativeWithStrongPercentualButNotIsMoreSignificativeWithMediumPercentual() {
+	public void shouldReturnFalseWhenWeightWeakPasswordIsMoreSignificantThanWeightStrongButNotIsMoreSignificantThanWeightMedium() {
 		password = PasswordFixture.get().withPercentualWeak(30).withPercentualMedium(50).withPercentualStrong(20).build();
 		assertFalse(service.isWeakPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordWeakPercentualIsMoreSignificativeWithMediumPercentualButNotIsMoreSignificativeWithStrongPercentual() {
+	public void shouldReturnFalseWhenWeightWeakPasswordIsMoreSignificantThanWeightMediumButNotIsMoreSignificantThanWeightStrong() {
 		password = PasswordFixture.get().withPercentualWeak(30).withPercentualMedium(20).withPercentualStrong(50).build();
 		assertFalse(service.isWeakPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnTrueWhenPasswordWeakPercentualDrawWithMediumPercentual() {
+	public void shouldReturnTrueWhenWeightWeakDrawWithWeightMedium() {
 		password = PasswordFixture.get().withPercentualWeak(50).withPercentualMedium(50).build();
 		assertTrue(service.isWeakPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnTrueWhenPasswordWeakPercentualDrawWithStrongPercentual() {
+	public void shouldReturnTrueWhenWeightWeakDrawWithWeightStrong() {
 		password = PasswordFixture.get().withPercentualWeak(50).withPercentualStrong(50).build();
 		assertTrue(service.isWeakPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnTrueWhenPasswordWeakPercentualDrawWithMediumPercentualAndWithStrongPercentual() {
+	public void shouldReturnTrueWhenWeightWeakDrawWithWeightMediumAndDrawWithWeightStrong() {
 		password = PasswordFixture.get().withPercentualWeak(33.3).withPercentualMedium(33.3).withPercentualStrong(33.3).build();
 		assertTrue(service.isWeakPassword(password));
 	}
 	
+	
+	//
 	@Test
-	public void shouldReturnTrueWhenPasswordMediumPercentualIsMoreSignificativeWithWeakAndStrongPercentuals() {
+	public void shouldReturnTrueWhenWeightMediumIsMoreSignificantThanWeightWeakAndWeightStrong() {
 		password = PasswordFixture.get().withPercentualWeak(30).withPercentualMedium(50).withPercentualStrong(20).build();
 		assertTrue(service.isMediumPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordMediumPercentualNotIsMoreSignificativeWithWeakAndStrongPercentuals() {
+	public void shouldReturnFalseWhenWeightMediumNotIsMoreSignificantThanWeightWeakAndWeightStrong() {
 		password = PasswordFixture.get().withPercentualWeak(50).withPercentualMedium(20).withPercentualStrong(30).build();
 		assertFalse(service.isMediumPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnTrueWhenPasswordMediumPercentualDrawWithStrongPercentual() {
+	public void shouldReturnTrueWhenWeightMediumDrawWithWeightStrong() {
 		password = PasswordFixture.get().withPercentualMedium(50).withPercentualStrong(50).build();
 		assertTrue(service.isMediumPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordMediumPercentualIsMoreSignificativeWithWeakPercentualButNotIsMoreSignificativeWithStrongPercentual() {
+	public void shouldReturnFalseWhenWeightMediumPasswordIsMoreSignificantThanWeightWeakButNotIsMoreSignificantThanWeightStrong() {
 		password = PasswordFixture.get().withPercentualWeak(20).withPercentualMedium(30).withPercentualStrong(50).build();
 		assertFalse(service.isMediumPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordMediumPercentualIsMoreSignificativeWithStrongPercentualButNotIsMoreSignificativeWithWeakPercentual() {
+	public void shouldReturnFalseWhenWeightMediumPasswordIsMoreSignificantThanWeightStrongButNotIsMoreSignificantThanWeightWeak() {
 		password = PasswordFixture.get().withPercentualWeak(50).withPercentualMedium(30).withPercentualStrong(20).build();
 		assertFalse(service.isMediumPassword(password));
 	}
 	
+	
+	//
 	@Test
-	public void shouldReturnTrueWhenPasswordStrongPercentualIsMoreSignificativeWithWeakAndMediumPercentuals() {
+	public void shouldReturnTrueWhenWeightStrongIsMoreSignificantThanWeightWeakAndWeightMedium() {
 		password = PasswordFixture.get().withPercentualWeak(30).withPercentualMedium(20).withPercentualStrong(50).build();
 		assertTrue(service.isStrongPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordStrongPercentualNotIsMoreSignificativeWithWeakAndMediumPercentuals() {
+	public void shouldReturnFalseWhenWeightStrongNotIsMoreSignificantThanWeightWeakAndWeightMedium() {
 		password = PasswordFixture.get().withPercentualWeak(50).withPercentualMedium(30).withPercentualStrong(20).build();
 		assertFalse(service.isStrongPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordStrongPercentualIsMoreSignificativeWithWeakPercentualButNotIsMoreSignificativeWithMediumPercentual() {
+	public void shouldReturnFalseWhenWeightStrongPasswordIsMoreSignificantThanWeightWeakButNotIsMoreSignificantThanWeightMedium() {
 		password = PasswordFixture.get().withPercentualWeak(20).withPercentualMedium(50).withPercentualStrong(30).build();
 		assertFalse(service.isStrongPassword(password));
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenPasswordStrongPercentualIsMoreSignificativeWithMediumPercentualButNotIsMoreSignificativeWithWeakPercentual() {
+	public void shouldReturnFalseWhenWeightStrongPasswordIsMoreSignificantThanWeightMediumButNotIsMoreSignificantThanWeightWeak() {
 		password = PasswordFixture.get().withPercentualWeak(50).withPercentualMedium(20).withPercentualStrong(30).build();
 		assertFalse(service.isStrongPassword(password));
 	}
 	
 	@Test
-	public void shouldPasswordWeakPercentualEquals50WhenSizeAndDictionaryCheckersAreWeak() {
+	public void shouldSetWeigthForWeakPasswords() {
 		Password password = PasswordFixture.get().withPassword().build();
 		
-		given(checkerSize.checkPassword(any(Password.class))).willReturn(WEAK);
-		given(checkerDictionary.checkPassword(any(Password.class))).willReturn(WEAK);
+		given(checkerSize.checkPasswordStrength(any(Password.class))).willReturn(WEAK);
+		given(checkerSize.getPonderation()).willReturn(30.0);
+		given(checkerDictionary.checkPasswordStrength(any(Password.class))).willReturn(WEAK);
+		given(checkerDictionary.getPonderation()).willReturn(20.0);
 		
-		service.applyPercentualStrong(password);
+		service.applyWeight(password, checkers);
 		
-		assertEquals(50.0, password.getPercentualWeak(), 0.0);
+		assertEquals(50.0, password.getWeakWeight(), 0.0);
 	}
 	
 	@Test
-	public void shouldPasswordMediumPercentualEquals50WhenSizeAndDictionaryCheckersAreMedium() {
+	public void shouldSetWeigthForMediumPasswords() {
 		Password password = PasswordFixture.get().withPassword().build();
 		
-		given(checkerSize.checkPassword(any(Password.class))).willReturn(MEDIUM);
-		given(checkerDictionary.checkPassword(any(Password.class))).willReturn(MEDIUM);
+		given(checkerSize.checkPasswordStrength(any(Password.class))).willReturn(MEDIUM);
+		given(checkerSize.getPonderation()).willReturn(30.0);
+		given(checkerDictionary.checkPasswordStrength(any(Password.class))).willReturn(MEDIUM);
+		given(checkerDictionary.getPonderation()).willReturn(20.0);
 		
-		service.applyPercentualStrong(password);
+		service.applyWeight(password, checkers);
 		
-		assertEquals(50.0, password.getPercentualMedium(), 0.0);
+		assertEquals(50.0, password.getMediumWeight(), 0.0);
 	}
 	
 	@Test
-	public void shouldPasswordStrongPercentualEquals50WhenSizeAndDictionaryCheckersAreStrong() {
+	public void shouldSetWeigthForStrongPasswords() {
 		Password password = PasswordFixture.get().withPassword().build();
 		
-		given(checkerSize.checkPassword(any(Password.class))).willReturn(STRONG);
-		given(checkerDictionary.checkPassword(any(Password.class))).willReturn(STRONG);
+		given(checkerSize.checkPasswordStrength(any(Password.class))).willReturn(STRONG);
+		given(checkerSize.getPonderation()).willReturn(30.0);
+		given(checkerDictionary.checkPasswordStrength(any(Password.class))).willReturn(STRONG);
+		given(checkerDictionary.getPonderation()).willReturn(20.0);
 		
-		service.applyPercentualStrong(password);
+		service.applyWeight(password, checkers);
 		
-		assertEquals(50.0, password.getPercentualStrong(), 0.0);
+		assertEquals(50.0, password.getStrongWeigth(), 0.0);
 	}
-
+	
 }

@@ -7,9 +7,9 @@ public class Password {
 	private String password;
 	private String status;
 	
-	private double percentualWeak;
-	private double percentualMedium;
-	private double percentualStrong;
+	private double weakWeight;
+	private double mediumWeight;
+	private double strongWeigth;
 	
 	public long getId() {
 		return id;
@@ -35,28 +35,28 @@ public class Password {
 		this.status = status;
 	}
 	
-	public double getPercentualWeak() {
-		return percentualWeak;
+	public double getWeakWeight() {
+		return weakWeight;
 	}
 
-	public void setPercentualWeak(double percentualWeak) {
-		this.percentualWeak = percentualWeak;
+	public void setWeakWeight(double weakWeight) {
+		this.weakWeight = weakWeight;
 	}
 
-	public double getPercentualMedium() {
-		return percentualMedium;
+	public double getMediumWeight() {
+		return mediumWeight;
 	}
 
-	public void setPercentualMedium(double percentualMedium) {
-		this.percentualMedium = percentualMedium;
+	public void setMediumWeight(double mediumWeight) {
+		this.mediumWeight = mediumWeight;
 	}
 
-	public double getPercentualStrong() {
-		return percentualStrong;
+	public double getStrongWeigth() {
+		return strongWeigth;
 	}
 	
-	public void setPercentualStrong(double percentualStrong) {
-		this.percentualStrong = percentualStrong;
+	public void setStrongWeigth(double strongWeigth) {
+		this.strongWeigth = strongWeigth;
 	}
 	
 }
