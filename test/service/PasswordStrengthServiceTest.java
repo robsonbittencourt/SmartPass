@@ -6,25 +6,30 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static service.PasswordStrengthType.MEDIUM;
+import static service.PasswordStrengthType.STRONG;
 import static service.PasswordStrengthType.WEAK;
 import model.Password;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import fixture.PasswordFixture;
 
 public class PasswordStrengthServiceTest {
 	
+	@InjectMocks
 	private PasswordStrengthService service;
 	private Password password;
 	@Mock
-	private PasswordCheck checker;
+	private PasswordCheckSize checkerSize;
+	@Mock
+	private PasswordCheckDictionary checkerDictionary;
 	
 	@Before
 	public void setUp() {
-		service = new PasswordStrengthService();
 		initMocks(this);
 	}
 	
@@ -126,13 +131,38 @@ public class PasswordStrengthServiceTest {
 	
 	@Test
 	public void shouldPasswordWeakPercentualEquals50WhenSizeAndDictionaryCheckersAreWeak() {
-		Password password = PasswordFixture.get().withPassword("pão").build();
+		Password password = PasswordFixture.get().withPassword().build();
 		
-		//given(checker.checkPassword(any(Password.class))).willReturn(WEAK);
+		given(checkerSize.checkPassword(any(Password.class))).willReturn(WEAK);
+		given(checkerDictionary.checkPassword(any(Password.class))).willReturn(WEAK);
 		
 		service.applyPercentualStrong(password);
 		
 		assertEquals(50.0, password.getPercentualWeak(), 0.0);
+	}
+	
+	@Test
+	public void shouldPasswordMediumPercentualEquals50WhenSizeAndDictionaryCheckersAreMedium() {
+		Password password = PasswordFixture.get().withPassword().build();
+		
+		given(checkerSize.checkPassword(any(Password.class))).willReturn(MEDIUM);
+		given(checkerDictionary.checkPassword(any(Password.class))).willReturn(MEDIUM);
+		
+		service.applyPercentualStrong(password);
+		
+		assertEquals(50.0, password.getPercentualMedium(), 0.0);
+	}
+	
+	@Test
+	public void shouldPasswordStrongPercentualEquals50WhenSizeAndDictionaryCheckersAreStrong() {
+		Password password = PasswordFixture.get().withPassword().build();
+		
+		given(checkerSize.checkPassword(any(Password.class))).willReturn(STRONG);
+		given(checkerDictionary.checkPassword(any(Password.class))).willReturn(STRONG);
+		
+		service.applyPercentualStrong(password);
+		
+		assertEquals(50.0, password.getPercentualStrong(), 0.0);
 	}
 
 }

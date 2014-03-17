@@ -3,13 +3,19 @@ package service;
 import static service.PasswordStrengthType.MEDIUM;
 import static service.PasswordStrengthType.STRONG;
 import static service.PasswordStrengthType.WEAK;
+
+import com.google.inject.Inject;
+
 import model.Password;
 import br.com.caelum.vraptor.ioc.Component;
 
 @Component
 public class PasswordStrengthService {
 	
-	private PasswordCheck checker;
+	@Inject
+	private PasswordCheckSize checkerSize;
+	@Inject
+	private PasswordCheckDictionary checkerDictionary;
 
 	public PasswordStrengthType verifyPasswordStrenght(Password password) {
 		applyPercentualStrong(password);
@@ -20,13 +26,12 @@ public class PasswordStrengthService {
 	}
 
 	public void applyPercentualStrong(Password password) {
-		applyPercentualStrongByChecker(password, new PasswordCheckSize(), 30.0);
-		applyPercentualStrongByChecker(password, new PasswordCheckDictionary(), 20.0);
+		applyPercentualStrongByChecker(password, checkerSize, 30.0);
+		applyPercentualStrongByChecker(password, checkerDictionary, 20.0);
 	}
 
 	private void applyPercentualStrongByChecker(Password password, PasswordCheck checker, double percentual) {
-		this.checker = checker;
-		if (this.checker.checkPassword(password).equals(WEAK)) password.setPercentualWeak(password.getPercentualWeak() + percentual);
+		if (checker.checkPassword(password).equals(WEAK)) password.setPercentualWeak(password.getPercentualWeak() + percentual);
 		else if (checker.checkPassword(password).equals(MEDIUM)) password.setPercentualMedium(password.getPercentualMedium() + percentual);
 		else if (checker.checkPassword(password).equals(STRONG)) password.setPercentualStrong(password.getPercentualStrong() + percentual);
 	}
