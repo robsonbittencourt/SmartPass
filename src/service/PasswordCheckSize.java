@@ -5,7 +5,9 @@ import static service.PasswordStrengthType.*;
 
 public class PasswordCheckSize implements PasswordCheck{
 
-	public PasswordStrengthType checkPassword(Password password) {
+	private double ponderation = 30.0;
+
+	public PasswordStrengthType checkPasswordStrength(Password password) {
 		int passwordLength = password.getPassword().length();
 		
 		if(passwordLength < 4)
@@ -14,6 +16,14 @@ public class PasswordCheckSize implements PasswordCheck{
 			return MEDIUM;
 		
 		return STRONG;
+	}
+
+	public void setPonderation(double ponderation) {
+		this.ponderation = ponderation;
+	}
+	
+	public double getPonderation() {
+		return ponderation;
 	}
 
 }

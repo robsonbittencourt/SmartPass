@@ -3,44 +3,54 @@ package service;
 import static service.PasswordStrengthType.MEDIUM;
 import static service.PasswordStrengthType.STRONG;
 import static service.PasswordStrengthType.WEAK;
+
+import java.util.List;
+
 import model.Password;
 import br.com.caelum.vraptor.ioc.Component;
 
 @Component
 public class PasswordStrengthService {
-	
-	private PasswordCheck checker;
 
-	public PasswordStrengthType verifyPasswordStrenght(Password password) {
-		applyPercentualStrong(password);
+	public PasswordStrengthType verifyPasswordStrenght(Password password, List<PasswordCheck> checkers) {
+		applyWeight(password, checkers);
+		return getPasswordStrength(password);
+	}
+
+	protected void applyWeight(Password password, List<PasswordCheck> checkers) {
+		for (PasswordCheck checker : checkers) {
+			applyWeightByChecker(password, checker);
+		}
+	}
+
+	private void applyWeightByChecker(Password password, PasswordCheck checker) {
+		PasswordStrengthType passwordStrength = checker.checkPasswordStrength(password);
+		double ponderation = checker.getPonderation();
+		if (passwordStrength.equals(WEAK))
+			password.setWeakWeight(password.getWeakWeight() + ponderation);
+		else if (passwordStrength.equals(MEDIUM))
+			password.setMediumWeight(password.getMediumWeight() + ponderation);
+		else if (passwordStrength.equals(STRONG))
+			password.setStrongWeigth(password.getStrongWeigth() + ponderation);
+	}
+	
+	private PasswordStrengthType getPasswordStrength(Password password) {
 		if (isWeakPassword(password)) return WEAK;
 		if (isMediumPassword(password)) return MEDIUM;
 		if (isStrongPassword(password)) return STRONG;
 		return WEAK;
 	}
 
-	public void applyPercentualStrong(Password password) {
-		applyPercentualStrongByChecker(password, new PasswordCheckSize(), 30.0);
-		applyPercentualStrongByChecker(password, new PasswordCheckDictionary(), 20.0);
+	protected boolean isWeakPassword(Password password) {
+		return (password.getWeakWeight() >= password.getMediumWeight() && password.getWeakWeight() >= password.getStrongWeigth());
 	}
 
-	private void applyPercentualStrongByChecker(Password password, PasswordCheck checker, double percentual) {
-		this.checker = checker;
-		if (this.checker.checkPassword(password).equals(WEAK)) password.setPercentualWeak(password.getPercentualWeak() + percentual);
-		else if (checker.checkPassword(password).equals(MEDIUM)) password.setPercentualMedium(password.getPercentualMedium() + percentual);
-		else if (checker.checkPassword(password).equals(STRONG)) password.setPercentualStrong(password.getPercentualStrong() + percentual);
-	}
-	
-	public boolean isWeakPassword(Password password) {
-		return (password.getPercentualWeak() >= password.getPercentualMedium() && password.getPercentualWeak() >= password.getPercentualStrong());
+	protected boolean isMediumPassword(Password password) {
+		return (password.getMediumWeight() > password.getWeakWeight() && password.getMediumWeight() >= password.getStrongWeigth());
 	}
 
-	public boolean isMediumPassword(Password password) {
-		return (password.getPercentualMedium() > password.getPercentualWeak() && password.getPercentualMedium() >= password.getPercentualStrong());
-	}
-
-	public boolean isStrongPassword(Password password) {
-		return (password.getPercentualStrong() > password.getPercentualWeak() && password.getPercentualStrong() > password.getPercentualMedium());
+	protected boolean isStrongPassword(Password password) {
+		return (password.getStrongWeigth() > password.getWeakWeight() && password.getStrongWeigth() > password.getMediumWeight());
 	}
 
 }
