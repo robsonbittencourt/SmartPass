@@ -6,9 +6,11 @@ import static type.PasswordStrengthType.WEAK;
 import type.PasswordStrengthType;
 import model.Password;
 
-public class PasswordCheckSize implements PasswordCheck{
+public class PasswordCheckSize extends PasswordCheck {
 
-	private double ponderation = 30.0;
+	public PasswordCheckSize(double weight) {
+		super(weight);
+	}
 
 	public PasswordStrengthType checkPasswordStrength(Password password) {
 		int passwordLength = password.getPassword().length();
@@ -19,14 +21,6 @@ public class PasswordCheckSize implements PasswordCheck{
 			return MEDIUM;
 		
 		return STRONG;
-	}
-
-	public void setWeigth(double ponderation) {
-		this.ponderation = ponderation;
-	}
-	
-	public double getWeigth() {
-		return ponderation;
 	}
 
 }

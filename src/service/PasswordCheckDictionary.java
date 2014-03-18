@@ -5,37 +5,25 @@ import static type.PasswordStrengthType.WEAK;
 
 import java.util.ArrayList;
 
-import type.PasswordStrengthType;
 import model.Password;
+import type.PasswordStrengthType;
 
-public class PasswordCheckDictionary implements PasswordCheck {
+public class PasswordCheckDictionary extends PasswordCheck {
 
-	private ArrayList<String> dictionary = new ArrayList<String>();
-	private double weigth = 20.0;
-
-	public PasswordCheckDictionary() {
-		dictionary.add("casa");
-		dictionary.add("pão");
+	public PasswordCheckDictionary(double weight) {
+		super(weight);
 	}
 
 	public PasswordStrengthType checkPasswordStrength(Password password) {
-		if (existsInDictionary(password.getPassword())) 
+		// TODO: It's a fake implementation
+		ArrayList<String> dictionary = new ArrayList<String>();
+		dictionary.add("casa");
+		dictionary.add("pão");
+		
+		if (dictionary.contains(password.getPassword()))
 			return WEAK;
-		else {
+		else 
 			return STRONG;
-		}
-	}
-
-	private boolean existsInDictionary(String password) {
-		return dictionary.contains(password);
 	}
 	
-	public void setWeigth(double ponderation) {
-		this.weigth = ponderation;
-	}
-
-	public double getWeigth() {
-		return this.weigth;
-	}
-
 }

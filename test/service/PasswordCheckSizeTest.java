@@ -16,7 +16,7 @@ public class PasswordCheckSizeTest {
 	
 	@Before
 	public void setUp() {
-		checkSize = new PasswordCheckSize();
+		checkSize = new PasswordCheckSize(30);
 		password = new Password();
 	}
 	

@@ -1,12 +1,23 @@
 package service;
 
-import type.PasswordStrengthType;
 import model.Password;
+import type.PasswordStrengthType;
 
 
-public interface PasswordCheck {
+public abstract class PasswordCheck {
+	private double weight;
 	
-	PasswordStrengthType checkPasswordStrength(Password password);
-	void setWeigth(double ponderation);
-	double getWeigth();
+	public abstract PasswordStrengthType checkPasswordStrength(Password password);
+	
+	public PasswordCheck(double weight) {
+		this.weight = weight;
+	}
+	
+	public void setWeigth(double weight) {
+		this.weight = weight;
+	}
+	
+	public double getWeigth() {
+		return weight;
+	}
 }

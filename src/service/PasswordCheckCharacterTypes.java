@@ -6,12 +6,14 @@ import static type.PasswordStrengthType.WEAK;
 
 import java.util.regex.Pattern;
 
-import type.PasswordStrengthType;
 import model.Password;
+import type.PasswordStrengthType;
 
-public class PasswordCheckCharacterTypes implements PasswordCheck {
+public class PasswordCheckCharacterTypes extends PasswordCheck {
 	
-	private double weigth = 20.0;
+	public PasswordCheckCharacterTypes(double weight) {
+		super(weight);
+	}
 
 	public PasswordStrengthType checkPasswordStrength(Password password) {
 		Pattern weakChecker = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?!.*[0-9].*)(?!.*[^A-Za-z0-9]).*$");
@@ -26,13 +28,5 @@ public class PasswordCheckCharacterTypes implements PasswordCheck {
 			return STRONG;
 		return WEAK;
 	}
-
-	public void setWeigth(double ponderation) {
-		this.weigth = ponderation;
-	}
-
-	public double getWeigth() {
-		return this.weigth;
-	}
-
+	
 }
