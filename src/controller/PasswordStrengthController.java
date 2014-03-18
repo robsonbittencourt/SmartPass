@@ -1,6 +1,13 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Password;
+import service.PasswordCheck;
+import service.PasswordCheckCharacterTypes;
+import service.PasswordCheckDictionary;
+import service.PasswordCheckSize;
 import service.PasswordStrengthService;
 import type.PasswordStrengthType;
 import br.com.caelum.vraptor.Get;
@@ -26,8 +33,16 @@ public class PasswordStrengthController {
 
 	@Post("/passwordStrength")
 	public void passwordStrength(Password password) {
-		PasswordStrengthType passwordStreght = service.verifyPasswordStrenght(password, null);
+		PasswordStrengthType passwordStreght = service.verifyPasswordStrenght(password, getAllPasswordCheckers());
 		password.setMessageStatus(passwordStreght.getMessageStatus());
 		result.include("password", password);
+	}
+
+	private List<PasswordCheck> getAllPasswordCheckers() {
+		List<PasswordCheck> checkers = new ArrayList<PasswordCheck>();
+		checkers.add(new PasswordCheckCharacterTypes(30));
+		checkers.add(new PasswordCheckSize(30));
+		checkers.add(new PasswordCheckDictionary(20));
+		return checkers;
 	}
 }
