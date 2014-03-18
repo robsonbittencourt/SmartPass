@@ -4,8 +4,9 @@ package service;
 import model.Password;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
+import type.PasswordStrengthType;
+import static org.junit.Assert.*;
 import fixture.PasswordFixture;
 
 

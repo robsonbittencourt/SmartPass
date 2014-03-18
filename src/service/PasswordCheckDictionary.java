@@ -1,10 +1,11 @@
 package service;
 
-import static service.PasswordStrengthType.STRONG;
-import static service.PasswordStrengthType.WEAK;
+import static type.PasswordStrengthType.STRONG;
+import static type.PasswordStrengthType.WEAK;
 
 import java.util.ArrayList;
 
+import type.PasswordStrengthType;
 import model.Password;
 
 public class PasswordCheckDictionary implements PasswordCheck {

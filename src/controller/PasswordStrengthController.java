@@ -2,7 +2,7 @@ package controller;
 
 import model.Password;
 import service.PasswordStrengthService;
-import service.PasswordStrengthType;
+import type.PasswordStrengthType;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;

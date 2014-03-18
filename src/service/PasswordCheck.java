@@ -1,5 +1,6 @@
 package service;
 
+import type.PasswordStrengthType;
 import model.Password;
 
 

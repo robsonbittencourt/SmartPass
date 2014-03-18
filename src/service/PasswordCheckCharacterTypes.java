@@ -1,11 +1,12 @@
 package service;
 
-import static service.PasswordStrengthType.MEDIUM;
-import static service.PasswordStrengthType.STRONG;
-import static service.PasswordStrengthType.WEAK;
+import static type.PasswordStrengthType.MEDIUM;
+import static type.PasswordStrengthType.STRONG;
+import static type.PasswordStrengthType.WEAK;
 
 import java.util.regex.Pattern;
 
+import type.PasswordStrengthType;
 import model.Password;
 
 public class PasswordCheckCharacterTypes implements PasswordCheck {

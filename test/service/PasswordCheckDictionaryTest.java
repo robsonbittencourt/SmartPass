@@ -1,8 +1,8 @@
 package service;
 
 import static org.junit.Assert.assertEquals;
-import static service.PasswordStrengthType.STRONG;
-import static service.PasswordStrengthType.WEAK;
+import static type.PasswordStrengthType.STRONG;
+import static type.PasswordStrengthType.WEAK;
 import model.Password;
 
 import org.junit.Test;
