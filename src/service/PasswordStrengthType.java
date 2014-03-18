@@ -3,9 +3,9 @@ package service;
 
 public enum PasswordStrengthType {
 	
-	STRONG("Senha forte"),
+	WEAK("Senha fraca"),
 	MEDIUM("Senha média"),
-	WEAK("Senha fraca");
+	STRONG("Senha forte");
 	
 	private String messageStatus;
 	

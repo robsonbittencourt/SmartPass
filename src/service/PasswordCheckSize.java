@@ -1,7 +1,9 @@
 package service;
 
+import static service.PasswordStrengthType.MEDIUM;
+import static service.PasswordStrengthType.STRONG;
+import static service.PasswordStrengthType.WEAK;
 import model.Password;
-import static service.PasswordStrengthType.*;
 
 public class PasswordCheckSize implements PasswordCheck{
 
@@ -18,11 +20,11 @@ public class PasswordCheckSize implements PasswordCheck{
 		return STRONG;
 	}
 
-	public void setPonderation(double ponderation) {
+	public void setWeigth(double ponderation) {
 		this.ponderation = ponderation;
 	}
 	
-	public double getPonderation() {
+	public double getWeigth() {
 		return ponderation;
 	}
 

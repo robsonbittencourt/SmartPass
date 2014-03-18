@@ -6,7 +6,6 @@ public class Password {
 	private long id;
 	private String password;
 	private String status;
-	
 	private double weakWeight;
 	private double mediumWeight;
 	private double strongWeigth;
@@ -31,7 +30,7 @@ public class Password {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setMessageStatus(String status) {
 		this.status = status;
 	}
 	

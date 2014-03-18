@@ -1,12 +1,16 @@
 package service;
 
+import static service.PasswordStrengthType.MEDIUM;
+import static service.PasswordStrengthType.STRONG;
+import static service.PasswordStrengthType.WEAK;
+
 import java.util.regex.Pattern;
 
 import model.Password;
 
 public class PasswordCheckCharacterTypes implements PasswordCheck {
 	
-	private double ponderation = 20.0;
+	private double weigth = 20.0;
 
 	public PasswordStrengthType checkPasswordStrength(Password password) {
 		Pattern weakChecker = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?!.*[0-9].*)(?!.*[^A-Za-z0-9]).*$");
@@ -14,20 +18,20 @@ public class PasswordCheckCharacterTypes implements PasswordCheck {
 		Pattern strongChecker = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?=.*[^A-Za-z0-9]).*$");
 		
 		if (weakChecker.matcher(password.getPassword()).matches()) 
-			return PasswordStrengthType.WEAK;
+			return WEAK;
 		if (mediumChecker.matcher(password.getPassword()).matches()) 
-			return PasswordStrengthType.MEDIUM;
+			return MEDIUM;
 		if (strongChecker.matcher(password.getPassword()).matches()) 
-			return PasswordStrengthType.STRONG;
-		return PasswordStrengthType.WEAK;
+			return STRONG;
+		return WEAK;
 	}
 
-	public void setPonderation(double ponderation) {
-		this.ponderation = ponderation;
+	public void setWeigth(double ponderation) {
+		this.weigth = ponderation;
 	}
 
-	public double getPonderation() {
-		return this.ponderation;
+	public double getWeigth() {
+		return this.weigth;
 	}
 
 }

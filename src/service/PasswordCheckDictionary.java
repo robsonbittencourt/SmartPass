@@ -1,14 +1,16 @@
 package service;
 
+import static service.PasswordStrengthType.STRONG;
+import static service.PasswordStrengthType.WEAK;
+
 import java.util.ArrayList;
 
 import model.Password;
-import static service.PasswordStrengthType.*;
 
 public class PasswordCheckDictionary implements PasswordCheck {
 
 	private ArrayList<String> dictionary = new ArrayList<String>();
-	private double ponderation = 20.0;
+	private double weigth = 20.0;
 
 	public PasswordCheckDictionary() {
 		dictionary.add("casa");
@@ -27,12 +29,12 @@ public class PasswordCheckDictionary implements PasswordCheck {
 		return dictionary.contains(password);
 	}
 	
-	public void setPonderation(double ponderation) {
-		this.ponderation = ponderation;
+	public void setWeigth(double ponderation) {
+		this.weigth = ponderation;
 	}
 
-	public double getPonderation() {
-		return this.ponderation;
+	public double getWeigth() {
+		return this.weigth;
 	}
 
 }

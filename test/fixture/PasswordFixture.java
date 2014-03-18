@@ -17,28 +17,28 @@ public class PasswordFixture {
 		return this.password;
 	}
 	
-	public PasswordFixture withPercentualWeak(double percentualWeak) {
-		this.password.setWeakWeight(percentualWeak);
+	public PasswordFixture withWeakWeight(double weakWeight) {
+		this.password.setWeakWeight(weakWeight);
 		return this;
 	}
 	
-	public PasswordFixture withPercentualMedium(double percentualMedium) {
-		this.password.setMediumWeight(percentualMedium);
+	public PasswordFixture withMediumWeight(double mediumWeight) {
+		this.password.setMediumWeight(mediumWeight);
 		return this;
 	}
 	
-	public PasswordFixture withPercentualStrong(double percentualStrong) {
-		this.password.setStrongWeigth(percentualStrong);
-		return this;
-	}
-
-	public PasswordFixture withPassword() {
-		this.password.setPassword(getRandomString(10));
+	public PasswordFixture withStrongWeight(double strongWeigth) {
+		this.password.setStrongWeigth(strongWeigth);
 		return this;
 	}
 
 	public PasswordFixture withPassword(String password) {
 		this.password.setPassword(password);
+		return this;
+	}
+	
+	public PasswordFixture withPassword() {
+		this.password.setPassword(getRandomString(10));
 		return this;
 	}
 	

@@ -25,7 +25,8 @@ public class PasswordStrengthService {
 
 	private void applyWeightByChecker(Password password, PasswordCheck checker) {
 		PasswordStrengthType passwordStrength = checker.checkPasswordStrength(password);
-		double ponderation = checker.getPonderation();
+		double ponderation = checker.getWeigth();
+		
 		if (passwordStrength.equals(WEAK))
 			password.setWeakWeight(password.getWeakWeight() + ponderation);
 		else if (passwordStrength.equals(MEDIUM))
@@ -35,9 +36,12 @@ public class PasswordStrengthService {
 	}
 	
 	private PasswordStrengthType getPasswordStrength(Password password) {
-		if (isWeakPassword(password)) return WEAK;
-		if (isMediumPassword(password)) return MEDIUM;
-		if (isStrongPassword(password)) return STRONG;
+		if (isWeakPassword(password))
+			return WEAK;
+		if (isMediumPassword(password))
+			return MEDIUM;
+		if (isStrongPassword(password))
+			return STRONG;
 		return WEAK;
 	}
 

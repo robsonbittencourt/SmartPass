@@ -8,9 +8,9 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.ioc.Component;
 
 @Component
-public class ImportCredentialsService {
+public class ImportCredentialService {
 
-	public void importCredentialsFile(UploadedFile inputFile) {
+	public void importCredentialFile(UploadedFile inputFile) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getFile()));
 		try {
 			System.out.println(reader.readLine());
