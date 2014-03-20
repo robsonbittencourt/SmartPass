@@ -5,26 +5,29 @@ import static type.PasswordStrengthType.STRONG;
 import static type.PasswordStrengthType.WEAK;
 import model.Password;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import check.PasswordCheckDictionary;
-
+import fixture.PasswordFixture;
 
 public class PasswordCheckDictionaryTest {
-	
+
+	private PasswordCheckDictionary checker;
+
+	@Before
+	public void setUp() {
+		checker = new PasswordCheckDictionary(20);
+	}
+
 	@Test
 	public void shouldReturnWeakWhenPasswordExistsInDictionary() {
-		PasswordCheckDictionary checkDictionary = new PasswordCheckDictionary(20);
-		Password password = new Password();
-		password.setPassword("casa");
-		assertEquals(WEAK, checkDictionary.checkPasswordStrength(password));
+		Password password = PasswordFixture.get().withPassword("casa").build();
+		assertEquals(WEAK, checker.checkPasswordStrength(password));
 	}
-	
+
 	@Test
 	public void shouldReturnStrongWhenPasswordDoNotExistsInDictionary() {
-		PasswordCheckDictionary checkDictionary = new PasswordCheckDictionary(20);
-		Password password = new Password();
-		password.setPassword("carro");
-		assertEquals(STRONG, checkDictionary.checkPasswordStrength(password));
+		Password password = PasswordFixture.get().withPassword("carro").build();
+		assertEquals(STRONG, checker.checkPasswordStrength(password));
 	}
 }

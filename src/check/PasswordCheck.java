@@ -3,7 +3,6 @@ package check;
 import model.Password;
 import type.PasswordStrengthType;
 
-
 public abstract class PasswordCheck {
 	private double weight;
 	
@@ -20,4 +19,5 @@ public abstract class PasswordCheck {
 	public double getWeigth() {
 		return weight;
 	}
+	
 }

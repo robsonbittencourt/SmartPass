@@ -10,33 +10,32 @@ import org.junit.Before;
 import org.junit.Test;
 
 import check.PasswordCheckSize;
+import fixture.PasswordFixture;
 
 public class PasswordCheckSizeTest {
 	
-	private PasswordCheckSize checkSize;
-	private Password password;
+	private PasswordCheckSize checker;
 	
 	@Before
 	public void setUp() {
-		checkSize = new PasswordCheckSize(30);
-		password = new Password();
+		checker = new PasswordCheckSize(30);
 	}
 	
 	@Test
 	public void shouldReturnWeakWhenPasswordLengthIsLessOfFour() {
-		password.setPassword("123");
-		assertEquals(WEAK, checkSize.checkPasswordStrength(password));
+		Password password = PasswordFixture.get().withPassword("123").build();
+		assertEquals(WEAK, checker.checkPasswordStrength(password));
 	}
 	
 	@Test
 	public void shouldReturnMediumWhenPasswordLengthIsBiggerToFourAndLessToEigth() {
-		password.setPassword("12345");
-		assertEquals(MEDIUM, checkSize.checkPasswordStrength(password));
+		Password password = PasswordFixture.get().withPassword("12345").build();
+		assertEquals(MEDIUM, checker.checkPasswordStrength(password));
 	}
 	
 	@Test
 	public void shouldReturnStrongWhenPasswordLengthIsBiggerToSeven() {
-		password.setPassword("12345678");
-		assertEquals(STRONG, checkSize.checkPasswordStrength(password));
+		Password password = PasswordFixture.get().withPassword("12345678").build();
+		assertEquals(STRONG, checker.checkPasswordStrength(password));
 	}
 }

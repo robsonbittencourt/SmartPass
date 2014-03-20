@@ -16,15 +16,15 @@ public class PasswordCheckCharacterTypes extends PasswordCheck {
 	}
 
 	public PasswordStrengthType checkPasswordStrength(Password password) {
-		Pattern weakChecker = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?!.*[0-9].*)(?!.*[^A-Za-z0-9]).*$");
-		Pattern mediumChecker = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?!.*[^A-Za-z0-9]).*$");
-		Pattern strongChecker = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?=.*[^A-Za-z0-9]).*$");
+		Pattern weakPattern = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?!.*[0-9].*)(?!.*[^A-Za-z0-9]).*$");
+		Pattern mediumPattern = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?!.*[^A-Za-z0-9]).*$");
+		Pattern strongPattern = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?=.*[^A-Za-z0-9]).*$");
 		
-		if (weakChecker.matcher(password.getPassword()).matches()) 
+		if (weakPattern.matcher(password.getPassword()).matches()) 
 			return WEAK;
-		if (mediumChecker.matcher(password.getPassword()).matches()) 
+		if (mediumPattern.matcher(password.getPassword()).matches()) 
 			return MEDIUM;
-		if (strongChecker.matcher(password.getPassword()).matches()) 
+		if (strongPattern.matcher(password.getPassword()).matches()) 
 			return STRONG;
 		return WEAK;
 	}

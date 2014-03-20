@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import model.Password;
 import type.PasswordStrengthType;
 
-
 public class PasswordCheckDate extends PasswordCheck {
 
 	public PasswordCheckDate(double weight) {
@@ -27,4 +26,5 @@ public class PasswordCheckDate extends PasswordCheck {
 			return MEDIUM;
 		return STRONG;
 	}
+	
 }
