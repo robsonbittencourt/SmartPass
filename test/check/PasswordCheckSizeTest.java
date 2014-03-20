@@ -1,4 +1,4 @@
-package service;
+package check;
 
 import static org.junit.Assert.assertEquals;
 import static type.PasswordStrengthType.MEDIUM;
@@ -8,6 +8,8 @@ import model.Password;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import check.PasswordCheckSize;
 
 public class PasswordCheckSizeTest {
 	

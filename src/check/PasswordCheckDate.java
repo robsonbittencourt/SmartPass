@@ -1,4 +1,4 @@
-package service;
+package check;
 
 import static type.PasswordStrengthType.STRONG;
 import static type.PasswordStrengthType.*;
@@ -9,9 +9,9 @@ import model.Password;
 import type.PasswordStrengthType;
 
 
-public class PassworCheckDate extends PasswordCheck {
+public class PasswordCheckDate extends PasswordCheck {
 
-	public PassworCheckDate(double weight) {
+	public PasswordCheckDate(double weight) {
 		super(weight);
 	}
 

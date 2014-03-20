@@ -1,4 +1,4 @@
-package service;
+package check;
 
 import static type.PasswordStrengthType.WEAK;
 
@@ -8,9 +8,9 @@ import model.Password;
 import type.PasswordStrengthType;
 
 
-public class PassworCheckSequence extends PasswordCheck {
+public class PasswordCheckSequence extends PasswordCheck {
 
-	public PassworCheckSequence(double weight) {
+	public PasswordCheckSequence(double weight) {
 		super(weight);
 	}
 

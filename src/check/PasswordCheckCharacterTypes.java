@@ -1,4 +1,4 @@
-package service;
+package check;
 
 import static type.PasswordStrengthType.MEDIUM;
 import static type.PasswordStrengthType.STRONG;

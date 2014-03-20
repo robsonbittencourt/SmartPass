@@ -20,6 +20,9 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import check.PasswordCheck;
+import check.PasswordCheckDictionary;
+import check.PasswordCheckSize;
 import fixture.PasswordFixture;
 
 public class PasswordStrengthServiceTest {

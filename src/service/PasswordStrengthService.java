@@ -6,6 +6,7 @@ import static type.PasswordStrengthType.WEAK;
 
 import java.util.List;
 
+import check.PasswordCheck;
 import type.PasswordStrengthType;
 import model.Password;
 import br.com.caelum.vraptor.ioc.Component;

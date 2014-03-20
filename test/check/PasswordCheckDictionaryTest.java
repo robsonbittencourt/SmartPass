@@ -1,4 +1,4 @@
-package service;
+package check;
 
 import static org.junit.Assert.assertEquals;
 import static type.PasswordStrengthType.STRONG;
@@ -6,6 +6,8 @@ import static type.PasswordStrengthType.WEAK;
 import model.Password;
 
 import org.junit.Test;
+
+import check.PasswordCheckDictionary;
 
 
 public class PasswordCheckDictionaryTest {

@@ -1,4 +1,4 @@
-package service;
+package check;
 
 import model.Password;
 import type.PasswordStrengthType;

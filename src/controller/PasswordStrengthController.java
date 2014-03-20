@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Password;
-import service.PasswordCheck;
-import service.PasswordCheckCharacterTypes;
-import service.PasswordCheckDictionary;
-import service.PasswordCheckSize;
 import service.PasswordStrengthService;
 import type.PasswordStrengthType;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import check.PasswordCheck;
+import check.PasswordCheckCharacterTypes;
+import check.PasswordCheckDictionary;
+import check.PasswordCheckSize;
 
 import com.google.inject.Inject;
 

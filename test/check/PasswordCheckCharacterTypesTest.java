@@ -1,10 +1,11 @@
-package service;
+package check;
 
 
 import model.Password;
 
 import org.junit.Test;
 
+import check.PasswordCheckCharacterTypes;
 import type.PasswordStrengthType;
 import static org.junit.Assert.*;
 import fixture.PasswordFixture;
