@@ -1,7 +1,8 @@
 package check;
 
+import static type.PasswordStrengthType.MEDIUM;
 import static type.PasswordStrengthType.STRONG;
-import static type.PasswordStrengthType.*;
+import static type.PasswordStrengthType.WEAK;
 
 import java.util.regex.Pattern;
 
@@ -17,18 +18,13 @@ public class PasswordCheckDate extends PasswordCheck {
 
 	@Override
 	public PasswordStrengthType checkPasswordStrength(Password password) {
-		Pattern weakChecker = Pattern.compile("(0?[1-9]|[12][0-9]|3[01])(0?[1-9]|1[012])((19|20)\\d\\d)");
-		Pattern mediumChecker = Pattern.compile("(0?[1-9]|[12][0-9]|3[01])(0?[1-9]|1[012])(\\d\\d)");
+		Pattern weakPattern = Pattern.compile("(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])((19|20)\\d{2})");
+		Pattern mediumPattern = Pattern.compile("(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])(\\d{2})");
 		
-		if(weakChecker.matcher(password.getPassword()).matches())		
+		if(weakPattern.matcher(password.getPassword()).matches())		
 			return WEAK;
-		if(mediumChecker.matcher(password.getPassword()).matches())
+		if(mediumPattern.matcher(password.getPassword()).matches())
 			return MEDIUM;
 		return STRONG;
 	}
-	
-	
-	
-	
-
 }

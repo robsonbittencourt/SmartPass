@@ -1,12 +1,12 @@
 package check;
 import static org.junit.Assert.assertEquals;
 import static type.PasswordStrengthType.MEDIUM;
+import static type.PasswordStrengthType.STRONG;
 import static type.PasswordStrengthType.WEAK;
 import model.Password;
 
 import org.junit.Test;
 
-import check.PasswordCheckDate;
 import fixture.PasswordFixture;
 
 public class PasswordCheckDateTest {
@@ -25,5 +25,13 @@ public class PasswordCheckDateTest {
 		Password password = PasswordFixture.get().withPassword("121014").build();
 			
 		assertEquals(MEDIUM, checker.checkPasswordStrength(password));
+	}
+	
+	@Test
+	public void shouldReturnStrongmWhenPasswordNotContainsAnyDatePattern() {
+		PasswordCheckDate checker = new PasswordCheckDate(10);
+		Password password = PasswordFixture.get().withPassword("1221017").build();
+			
+		assertEquals(STRONG, checker.checkPasswordStrength(password));
 	}
 }
