@@ -24,6 +24,15 @@
     			<span class="glyphicon form-control-feedback"></span>
   			</div>	
   			<button type="submit" class="btn btn-primary">Verificar</button>
+  			
+  			
+  			<div>
+  				</br>
+  				Password: ${password.password}</br>
+	  			Percentual Weak: ${password.weakWeight}</br>
+	  			Percentual Medium: ${password.mediumWeight}</br>
+	  			Percentual Strong: ${password.strongWeight}</br>
+			</div>
   		</form>	
   		
 	</div>

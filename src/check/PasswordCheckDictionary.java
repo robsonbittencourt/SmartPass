@@ -25,5 +25,10 @@ public class PasswordCheckDictionary extends PasswordCheck {
 		else 
 			return STRONG;
 	}
+
+	@Override
+	public String getCheck() {
+		return "Dictionary";
+	}
 	
 }

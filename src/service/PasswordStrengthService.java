@@ -28,13 +28,14 @@ public class PasswordStrengthService {
 	private void applyWeightByChecker(Password password, PasswordCheck checker) {
 		PasswordStrengthType passwordStrength = checker.checkPasswordStrength(password);
 		double ponderation = checker.getWeigth();
+		System.out.println(checker.getCheck() + ": " + passwordStrength);
 		
 		if (passwordStrength.equals(WEAK))
 			password.setWeakWeight(password.getWeakWeight() + ponderation);
 		else if (passwordStrength.equals(MEDIUM))
 			password.setMediumWeight(password.getMediumWeight() + ponderation);
 		else if (passwordStrength.equals(STRONG))
-			password.setStrongWeigth(password.getStrongWeigth() + ponderation);
+			password.setStrongWeigth(password.getStrongWeight() + ponderation);
 	}
 	
 	private PasswordStrengthType getPasswordStrength(Password password) {
@@ -48,15 +49,15 @@ public class PasswordStrengthService {
 	}
 
 	protected boolean isWeakPassword(Password password) {
-		return (password.getWeakWeight() >= password.getMediumWeight() && password.getWeakWeight() >= password.getStrongWeigth());
+		return (password.getWeakWeight() >= password.getMediumWeight() && password.getWeakWeight() >= password.getStrongWeight());
 	}
 
 	protected boolean isMediumPassword(Password password) {
-		return (password.getMediumWeight() > password.getWeakWeight() && password.getMediumWeight() >= password.getStrongWeigth());
+		return (password.getMediumWeight() > password.getWeakWeight() && password.getMediumWeight() >= password.getStrongWeight());
 	}
 
 	protected boolean isStrongPassword(Password password) {
-		return (password.getStrongWeigth() > password.getWeakWeight() && password.getStrongWeigth() > password.getMediumWeight());
+		return (password.getStrongWeight() > password.getWeakWeight() && password.getStrongWeight() > password.getMediumWeight());
 	}
 
 }

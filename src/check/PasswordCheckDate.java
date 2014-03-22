@@ -26,5 +26,10 @@ public class PasswordCheckDate extends PasswordCheck {
 			return MEDIUM;
 		return STRONG;
 	}
+
+	@Override
+	public String getCheck() {
+		return "Date";
+	}
 	
 }

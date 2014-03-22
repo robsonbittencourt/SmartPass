@@ -8,7 +8,14 @@ public class Password {
 	private String status;
 	private double weakWeight;
 	private double mediumWeight;
-	private double strongWeigth;
+	private double strongWeight;
+	
+	
+	public Password() {
+		this.weakWeight = 0;
+		this.mediumWeight = 0;
+		this.strongWeight = 0;
+	}
 	
 	public long getId() {
 		return id;
@@ -50,12 +57,12 @@ public class Password {
 		this.mediumWeight = mediumWeight;
 	}
 
-	public double getStrongWeigth() {
-		return strongWeigth;
+	public double getStrongWeight() {
+		return strongWeight;
 	}
 	
-	public void setStrongWeigth(double strongWeigth) {
-		this.strongWeigth = strongWeigth;
+	public void setStrongWeigth(double strongWeight) {
+		this.strongWeight = strongWeight;
 	}
 	
 }

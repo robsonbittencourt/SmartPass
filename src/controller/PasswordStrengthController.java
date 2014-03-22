@@ -12,7 +12,9 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import check.PasswordCheck;
 import check.PasswordCheckCharacterTypes;
+import check.PasswordCheckDate;
 import check.PasswordCheckDictionary;
+import check.PasswordCheckSequence;
 import check.PasswordCheckSize;
 
 import com.google.inject.Inject;
@@ -43,6 +45,8 @@ public class PasswordStrengthController {
 		checkers.add(new PasswordCheckCharacterTypes(30));
 		checkers.add(new PasswordCheckSize(30));
 		checkers.add(new PasswordCheckDictionary(20));
+		checkers.add(new PasswordCheckDate(10));
+		checkers.add(new PasswordCheckSequence(10));
 		return checkers;
 	}
 }

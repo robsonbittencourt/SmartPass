@@ -184,7 +184,7 @@ public class PasswordStrengthServiceTest {
 		
 		service.applyWeight(password, checkers);
 		
-		assertEquals(50.0, password.getStrongWeigth(), 0.0);
+		assertEquals(50.0, password.getStrongWeight(), 0.0);
 	}
 	
 }

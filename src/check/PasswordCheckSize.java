@@ -23,4 +23,9 @@ public class PasswordCheckSize extends PasswordCheck {
 		return STRONG;
 	}
 
+	@Override
+	public String getCheck() {
+		return "Size";
+	}
+
 }

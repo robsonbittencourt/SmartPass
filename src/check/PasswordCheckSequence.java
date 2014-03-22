@@ -24,5 +24,10 @@ public class PasswordCheckSequence extends PasswordCheck {
 				+ "(?!.*(abcd||cde|)).*$");
 		return false;
 	}
+
+	@Override
+	public String getCheck() {
+		return "Sequence";
+	}
 	
 }

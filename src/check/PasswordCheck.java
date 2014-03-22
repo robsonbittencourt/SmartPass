@@ -19,5 +19,7 @@ public abstract class PasswordCheck {
 	public double getWeigth() {
 		return weight;
 	}
+
+	public abstract String getCheck();
 	
 }
