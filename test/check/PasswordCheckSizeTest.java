@@ -28,14 +28,14 @@ public class PasswordCheckSizeTest {
 	}
 	
 	@Test
-	public void shouldReturnMediumWhenPasswordLengthIsBiggerToFourAndLessToEigth() {
+	public void shouldReturnMediumWhenPasswordLengthIsBiggerToFourAndLessToNine() {
 		Password password = PasswordFixture.get().withPassword("12345").build();
 		assertEquals(MEDIUM, checker.checkPasswordStrength(password));
 	}
 	
 	@Test
-	public void shouldReturnStrongWhenPasswordLengthIsBiggerToSeven() {
-		Password password = PasswordFixture.get().withPassword("12345678").build();
+	public void shouldReturnStrongWhenPasswordLengthIsBiggerToEight() {
+		Password password = PasswordFixture.get().withPassword("123456789").build();
 		assertEquals(STRONG, checker.checkPasswordStrength(password));
 	}
 }

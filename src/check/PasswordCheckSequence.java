@@ -1,9 +1,8 @@
 package check;
 
+import static type.PasswordStrengthType.MEDIUM;
+import static type.PasswordStrengthType.STRONG;
 import static type.PasswordStrengthType.WEAK;
-
-import java.util.regex.Pattern;
-
 import model.Password;
 import type.PasswordStrengthType;
 
@@ -16,15 +15,50 @@ public class PasswordCheckSequence extends PasswordCheck {
 
 	@Override
 	public PasswordStrengthType checkPasswordStrength(Password password) {
-		return WEAK;
+		if(isSequence(password.getPassword(), 4))
+			return WEAK;
+		if(isSequence(password.getPassword(), 3))
+			return MEDIUM;
+		return STRONG;
 	}
 	
-	private boolean isNumericSequence(String password) {
-		Pattern weakChecker = Pattern.compile("^(?!.*(0123|1234|2345|3456|4567|5678|6789|3210|4321|5432|6543|7654|8765|9876|0000|1111|2222|3333|4444|5555|6666|7777|8888|9999))"
-				+ "(?!.*(abcd||cde|)).*$");
-		return false;
+	public boolean isSequence(String password, int sequenceSize) {
+		return isAscendentSequence(password, sequenceSize) ||
+			   isDescendentSequence(password, sequenceSize) ||
+			   isEqualsSequence(password, sequenceSize);
+	}
+	
+	public boolean isAscendentSequence(String password, int sequenceSize) {
+		return isSequence(password, sequenceSize, 1);
 	}
 
+	public boolean isDescendentSequence(String password, int sequenceSize) {
+		return isSequence(password, sequenceSize, -1);
+	}
+	
+	public boolean isEqualsSequence(String password, int sequenceSize) {
+		return isSequence(password, sequenceSize, 0);
+	}
+	
+	private boolean isSequence(String password, int sequenceSize, int modifier) {
+		int count = 0;
+		int lastUnicodeNumber = -1;
+		
+		for(char letter : password.toUpperCase().toCharArray()) {
+			if (letter == lastUnicodeNumber + modifier)
+				count++;
+			else 
+				count = 0;
+			
+			if (count == sequenceSize - 1) 
+				return true;
+			
+			lastUnicodeNumber = letter;
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public String getCheck() {
 		return "Sequence";

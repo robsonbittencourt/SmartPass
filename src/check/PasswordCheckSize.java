@@ -17,7 +17,7 @@ public class PasswordCheckSize extends PasswordCheck {
 		
 		if(passwordLength < 4)
 			return WEAK;
-		if(passwordLength < 8)
+		if(passwordLength < 9)
 			return MEDIUM;
 		
 		return STRONG;

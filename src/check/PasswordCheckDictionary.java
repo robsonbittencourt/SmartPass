@@ -22,8 +22,8 @@ public class PasswordCheckDictionary extends PasswordCheck {
 		
 		if (dictionary.contains(password.getPassword()))
 			return WEAK;
-		else 
-			return STRONG;
+	
+		return STRONG;
 	}
 
 	@Override

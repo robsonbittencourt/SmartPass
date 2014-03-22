@@ -20,12 +20,12 @@ public class PasswordCheckCharacterTypes extends PasswordCheck {
 		Pattern mediumPattern = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?!.*[^A-Za-z0-9]).*$");
 		Pattern strongPattern = Pattern.compile("^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?=.*[^A-Za-z0-9]).*$");
 		
-		if (weakPattern.matcher(password.getPassword()).matches()) 
-			return WEAK;
-		if (mediumPattern.matcher(password.getPassword()).matches()) 
-			return MEDIUM;
 		if (strongPattern.matcher(password.getPassword()).matches()) 
 			return STRONG;
+		if (mediumPattern.matcher(password.getPassword()).matches()) 
+			return MEDIUM;
+		if (weakPattern.matcher(password.getPassword()).matches()) 
+			return WEAK;
 		return WEAK;
 	}
 
