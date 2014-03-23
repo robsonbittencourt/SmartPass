@@ -17,8 +17,8 @@ public class PasswordCheckDate extends PasswordCheck {
 
 	@Override
 	public PasswordStrengthType checkPasswordStrength(Password password) {
-		Pattern weakPattern = Pattern.compile("(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])((19|20)\\d{2})");
-		Pattern mediumPattern = Pattern.compile("(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])(\\d{2})");
+		Pattern weakPattern = Pattern.compile(".*(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])((19|20)\\d{2}).*");
+		Pattern mediumPattern = Pattern.compile(".*(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])(\\d{2}).*");
 		
 		if(weakPattern.matcher(password.getPassword()).matches())		
 			return WEAK;
