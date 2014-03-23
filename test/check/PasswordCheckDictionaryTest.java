@@ -12,6 +12,9 @@ import fixture.PasswordFixture;
 
 public class PasswordCheckDictionaryTest {
 
+	private static final String WORD_DOES_NOT_EXISTS_IN_DICTIONARY = "carro";
+	private static final String WORD_EXISTS_IN_DICTIONARY = "casa";
+	
 	private PasswordCheckDictionary checker;
 
 	@Before
@@ -21,13 +24,13 @@ public class PasswordCheckDictionaryTest {
 
 	@Test
 	public void shouldReturnWeakWhenPasswordExistsInDictionary() {
-		Password password = PasswordFixture.get().withPassword("casa").build();
+		Password password = PasswordFixture.get().withPassword(WORD_EXISTS_IN_DICTIONARY).build();
 		assertEquals(WEAK, checker.checkPasswordStrength(password));
 	}
 
 	@Test
 	public void shouldReturnStrongWhenPasswordDoNotExistsInDictionary() {
-		Password password = PasswordFixture.get().withPassword("carro").build();
+		Password password = PasswordFixture.get().withPassword(WORD_DOES_NOT_EXISTS_IN_DICTIONARY).build();
 		assertEquals(STRONG, checker.checkPasswordStrength(password));
 	}
 }
