@@ -17,13 +17,17 @@
 
 		<legend>Gere uma senha forte randomicamente</legend>
 
-		<form method="post" action="generatePassword" class="form-inline">
-    		<label class="control-label" for="password_id">Senha</label>
-			<div class="form-group has-feedback">
-    			<input type="text" name="randomPassword" value="${randomPassword}" class="form-control" id="password_id">
-    			<span class="glyphicon form-control-feedback"></span>
+		<form method="post" action="generatePassword" class="form-horizontal">
+    		<label class="control-label" for="password_id">Tamanho</label>
+			<div class="form-group">
+    			<input type="text" name="length" class="form-control" id="password_id">
+    			<button type="submit" class="btn btn-primary">Gerar</button>
   			</div>	
-  			<button type="submit" class="btn btn-primary">Gerar</button>
+  			<label class="control-label" for="password_id">Senha Gerada</label>
+  			<div class="form-group">
+  				<input type="text" value="${randomPassword}" class="form-control" id="password_id">
+  			</div>
+  			
   		</form>	
   		
 	</div>

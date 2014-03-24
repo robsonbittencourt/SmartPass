@@ -7,13 +7,13 @@ public enum PasswordStrengthType {
 	MEDIUM("Senha média"),
 	STRONG("Senha forte");
 	
-	private String messageStatus;
+	private String status;
 	
-	private PasswordStrengthType(String messageStatus){
-		this.messageStatus = messageStatus;
+	private PasswordStrengthType(String status){
+		this.status = status;
 	}
 	
-	public String getMessageStatus() {
-		return messageStatus;
+	public String getStatus() {
+		return status;
 	}
 }

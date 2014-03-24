@@ -38,28 +38,39 @@ public class PasswordFixture {
 	}
 	
 	public PasswordFixture withPassword() {
-		this.password.setPassword(getRandomString(10));
+		this.password.setPassword(generateRandomString(10));
 		return this;
 	}
 	
-	public static String getRandomString(int length) {
-		final Random random = new Random();
-		final StringBuilder sb = new StringBuilder();
+	public String generateRandomString(int length) {
+		Random random = new Random();
+		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < length; i++) {
-			switch (random.nextInt(3)) {
+			switch (random.nextInt(4)) {
 				case 0:
-					sb.append(new Character((char) (48 + random.nextInt((57 + 1 - 48)))));
+					builder.append(new Character((char) (48 + random.nextInt((57 + 1 - 48)))));
 					break;
 				case 1:
-					sb.append(new Character((char) (97 + random.nextInt((122 + 1 - 97)))));
+					builder.append(new Character((char) (97 + random.nextInt((122 + 1 - 97)))));
 					break;
 				case 2:
-					sb.append(new Character((char) (65 + random.nextInt((90 + 1 - 65)))));
+					builder.append(new Character((char) (65 + random.nextInt((90 + 1 - 65)))));
 					break;
-				default:
-					break;
+				case 3:
+					builder.append(new Character(generateRandomSpecialCharacter()));
 			}
 		}
-		return sb.toString();
+		return builder.toString();
+	}
+	
+	private Character generateRandomSpecialCharacter() {
+		Random random = new Random();
+		switch (random.nextInt(3)) {
+			case 0:
+				return new Character((char) (33 + random.nextInt((47 + 1 - 33))));
+			case 1:
+				return new Character((char) (58 + random.nextInt((64 + 1 - 58))));
+		}
+		return new Character((char) (91 + random.nextInt((96 + 1 - 91))));
 	}
 }

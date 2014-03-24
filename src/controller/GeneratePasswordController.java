@@ -22,8 +22,11 @@ public class GeneratePasswordController {
 	}
 	
 	@Post("/generatePassword")
-	public void generate() {
-		result.include("randomPassword", service.generateRandomStrongPassword());
+	public void generate(int length) {
+		String randonPassword = service.generateRandomStrongPassword(length);
+		if(randonPassword.isEmpty())
+			randonPassword = "O tamanho deve ser no mínimo 10.";
+		result.include("randomPassword", randonPassword);
 		result.forwardTo(this).generatePassword();
 	}
 }
