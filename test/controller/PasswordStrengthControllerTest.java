@@ -5,6 +5,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.same;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static type.PasswordStrengthType.WEAK;
@@ -44,7 +45,7 @@ public class PasswordStrengthControllerTest {
 	
 	@SuppressWarnings("unchecked")
 	@Test
-	public void shouldVerifyPasswordStrength() {
+	public void shouldVerifyPasswordStrengthWhenPasswordIsNotNull() {
 		Password password = PasswordFixture.get().withPassword().build();
 		
 		given(service.verifyPasswordStrenght(eq(password), any(List.class))).willReturn(WEAK);
@@ -53,6 +54,15 @@ public class PasswordStrengthControllerTest {
 		
 		assertEquals(WEAK.getStatus(), password.getStatus());
 		verify(result).include(same("password"), any(Password.class));
+	}
+	
+	@Test
+	public void shouldNotVerifyPasswordStrengthWhenPasswordIsNull() {
+		Password password = PasswordFixture.get().build();
+		
+		controller.passwordStrength(password);
+		
+		verify(service, never()).verifyPasswordStrenght(any(Password.class), any(List.class));
 	}
 	
 }
