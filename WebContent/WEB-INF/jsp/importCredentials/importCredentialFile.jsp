@@ -3,7 +3,7 @@
 
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
 
-	<div class="book-form">
+	<div class="form">
 
 		<legend>Importar arquivo de credenciais</legend>
 
@@ -16,3 +16,8 @@
 	
 <jsp:include page="/WEB-INF/jsp/footer.jsp"/>
 
+<script type="text/javascript">
+	$(function() {
+		$("#import-credential").addClass("active");
+	});
+</script>

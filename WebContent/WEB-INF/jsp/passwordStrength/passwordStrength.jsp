@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
-	<div class="book-form">
+	<div class="form">
 
 		<legend>Verifique a força de sua senha</legend>
 
@@ -14,13 +14,11 @@
   			</div>	
   			<button type="submit" class="btn btn-primary">Verificar</button>
   			
-  			
-  			<div>
-  				</br>
-  				Password: ${password.password}</br>
-	  			Percentual Weak: ${password.weakWeight}</br>
-	  			Percentual Medium: ${password.mediumWeight}</br>
-	  			Percentual Strong: ${password.strongWeight}</br>
+  			<div class="box">
+  				Sua senha é:</br>
+  				${password.weakWeight}% fraca</br>
+	  			${password.mediumWeight}% média</br>
+	  			${password.strongWeight}% forte</br>
 			</div>
   		</form>	
   		
@@ -29,6 +27,7 @@
 
 <script type="text/javascript">
 	$(function() {
+		$("#verify-strength").addClass("active");
 				
 		<c:choose>
         	<c:when test="${password.status eq 'Senha forte'}">
@@ -45,7 +44,8 @@
     		</c:when>
         </c:choose>
 	});
+	
 </script>
 
-</html>
+
 

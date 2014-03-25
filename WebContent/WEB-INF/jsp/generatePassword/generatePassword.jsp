@@ -3,7 +3,7 @@
 
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
 
-	<div class="book-form">
+	<div class="form">
 
 		<legend>Gere uma senha forte randomicamente</legend>
 
@@ -23,3 +23,9 @@
 	</div>
 
 <jsp:include page="/WEB-INF/jsp/footer.jsp"/>
+
+<script type="text/javascript">
+	$(function() {
+		$("#generate-password").addClass("active");
+	});
+</script>

@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-</body>
+		<div class="container navbar navbar-fixed-bottom">
+			<hr>
+			<footer>
+				<h4>2014 - Sistemas de Informação - Segurança em Sistemas de Informação</h4>
+			</footer>
+    	</div>
+	</body>
+</html>

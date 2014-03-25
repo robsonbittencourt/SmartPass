@@ -1,6 +1,6 @@
 package controller;
 
-import service.ImportCredentialsService;
+import service.ImportCredentialService;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
@@ -12,15 +12,15 @@ import com.google.inject.Inject;
 public class ImportCredentialsController {
 	
 	@Inject
-	private ImportCredentialsService service;
+	private ImportCredentialService service;
 
-	@Get("/importCredentials")
-	public void importCredentialsFile() {
+	@Get("/importCredential")
+	public void importCredentialFile() {
 		
 	}
 	
-	@Post("/importCredentials")
-	public void importCredentialsFile(UploadedFile inputFile) {
+	@Post("/importCredential")
+	public void importCredentialFile(UploadedFile inputFile) {
 		service.importCredentialFile(inputFile);
 	}
 }

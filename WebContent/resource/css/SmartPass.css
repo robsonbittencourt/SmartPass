@@ -1,12 +1,15 @@
-.book-form {
+.form {
 	margin:0 auto;
 	width: 400px;
 	padding: 10px;
 }
 
-.right {
-	float: right;
-	font-size: 24px;
-	color: #333333;
-	margin-top: 4px;
+.nav-menu {
+	margin-top: 2%;
+	margin-bottom: -3%;
 }
+
+.box {
+	margin-top: 5%;
+}
+
