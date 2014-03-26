@@ -9,9 +9,6 @@ import com.google.inject.Inject;
 @Resource
 public class IndexController {
 	
-	@Inject
-	private Result result;
-	
 	@Get("/index")
 	public void index() {
 		
