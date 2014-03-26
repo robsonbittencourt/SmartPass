@@ -12,7 +12,7 @@ import fixture.PasswordFixture;
 
 public class PasswordCheckDictionaryTest {
 
-	private static final String WORD_DOES_NOT_EXISTS_IN_DICTIONARY = "carro";
+	private static final String WORD_DOES_NOT_EXISTS_IN_DICTIONARY = "tdgsj";
 	private static final String WORD_EXISTS_IN_DICTIONARY = "casa";
 	
 	private PasswordCheckDictionary checker;
