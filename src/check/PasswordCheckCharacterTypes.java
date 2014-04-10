@@ -29,9 +29,4 @@ public class PasswordCheckCharacterTypes extends PasswordCheck {
 		return WEAK;
 	}
 
-	@Override
-	public String getCheck() {
-		return "CharacterTypes";
-	}
-	
 }

@@ -59,9 +59,4 @@ public class PasswordCheckSequence extends PasswordCheck {
 		return false;
 	}
 	
-	@Override
-	public String getCheck() {
-		return "Sequence";
-	}
-	
 }

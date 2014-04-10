@@ -28,7 +28,6 @@ public class PasswordStrengthService {
 	private void applyWeightByChecker(Password password, PasswordCheck checker) {
 		PasswordStrengthType passwordStrength = checker.checkPasswordStrength(password);
 		double ponderation = checker.getWeigth();
-		System.out.println(checker.getCheck() + ": " + passwordStrength);
 		
 		if (passwordStrength.equals(WEAK))
 			password.setWeakWeight(password.getWeakWeight() + ponderation);

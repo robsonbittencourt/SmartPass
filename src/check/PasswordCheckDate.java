@@ -27,9 +27,4 @@ public class PasswordCheckDate extends PasswordCheck {
 		return STRONG;
 	}
 
-	@Override
-	public String getCheck() {
-		return "Date";
-	}
-	
 }

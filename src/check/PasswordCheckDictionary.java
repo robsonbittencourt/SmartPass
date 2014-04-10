@@ -45,9 +45,4 @@ public class PasswordCheckDictionary extends PasswordCheck {
 		return dictionary;
 	}
 	
-	@Override
-	public String getCheck() {
-		return "Dictionary";
-	}
-	
 }
