@@ -5,7 +5,7 @@ public class Credential {
 	
 	private long id;
 	private String system;
-	private String user;
+	private String login;
 	private Password password;
 	
 	public long getId() {
@@ -24,12 +24,12 @@ public class Credential {
 		this.system = system;
 	}
 	
-	public String getUser() {
-		return user;
+	public String getLogin() {
+		return login;
 	}
 	
-	public void setUser(String user) {
-		this.user = user;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	
 	public Password getPassword() {
