@@ -1,9 +1,17 @@
 package model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity(name="users")
@@ -12,10 +20,18 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "users_id")
+	@Column(name = "users_id")
 	private long id;
-	private String name;
+	
+	@Column(name = "users_login")
 	private String login;
-	private String password;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "users_password")
+	private Password password;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Credential> credentials;
 	
 	public long getId() {
 		return id;
@@ -23,14 +39,6 @@ public class User {
 	
 	public void setId(long id) {
 		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public String getLogin() {
@@ -41,14 +49,20 @@ public class User {
 		this.login = login;
 	}
 	
-	public String getPassword() {
+	public Password getPassword() {
 		return password;
 	}
 	
-	public void setPassword(String password) {
+	public void setPassword(Password password) {
 		this.password = password;
 	}
 
-	
+	public List<Credential> getCredentials() {
+		return credentials;
+	}
+
+	public void setCredentials(List<Credential> credentials) {
+		this.credentials = credentials;
+	}
 	
 }

@@ -19,6 +19,9 @@
     <property name="hibernate.hbm2ddl.auto">validate</property>
     
 	<mapping class="model.User" />
+	<mapping class="model.Password" />
+	<mapping class="model.Credential" />
+	
 	
   </session-factory>
 </hibernate-configuration>

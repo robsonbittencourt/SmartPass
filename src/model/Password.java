@@ -1,15 +1,35 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
+@Entity(name="password")
+@SequenceGenerator(name = "password_id", sequenceName = "password_id")
 public class Password {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "password_id")
+	@Column(name = "password_id")
 	private long id;
-	private String password;
-	private String status;
-	private double weakWeight;
-	private double mediumWeight;
-	private double strongWeight;
 	
+	@Column(name = "password_password")
+	private String password;
+	
+	@Column(name = "password_status")
+	private String status;
+	
+	@Column(name = "password_weak_weight")
+	private double weakWeight;
+	
+	@Column(name = "password_medium_weight")
+	private double mediumWeight;
+	
+	@Column(name = "password_strong_weight")
+	private double strongWeight;
 	
 	public Password() {
 		this.weakWeight = 0;
