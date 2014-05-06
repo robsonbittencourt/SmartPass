@@ -14,8 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-import org.hibernate.annotations.Cascade;
-
 @Entity(name="users")
 @SequenceGenerator(name = "users_id", sequenceName = "users_id")
 public class User {
