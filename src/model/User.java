@@ -30,7 +30,8 @@ public class User {
 	@JoinColumn(name = "users_password")
 	private Password password;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "credential_users")
 	private List<Credential> credentials;
 	
 	public long getId() {
