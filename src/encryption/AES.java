@@ -1,12 +1,12 @@
 //Adapting for: https://gist.github.com/bricef/2436364
 
-package service;
+package encryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class EncryptionAESService {
+public class AES {
 
 	private static final int BLOCK_SIZE = 16;
 
