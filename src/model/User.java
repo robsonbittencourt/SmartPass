@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity(name="users")
 @SequenceGenerator(name = "users_id", sequenceName = "users_id")
 public class User {
@@ -30,7 +32,7 @@ public class User {
 	@JoinColumn(name = "users_password")
 	private Password password;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Credential> credentials;
 	
 	public long getId() {

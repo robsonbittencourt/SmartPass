@@ -1,6 +1,8 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import model.Credential;
 import model.Password;
@@ -22,7 +24,9 @@ public class Main {
 		User user = new User();
 		user.setLogin("rbittencourt");
 		user.setPassword(password);
-		user.setCredentials(Arrays.asList(credential));
+		List<Credential> credentials = new ArrayList<Credential>();
+		credentials.add(credential);
+		user.setCredentials(credentials);
 		
 		UserDao dao = new UserDao();
 		dao.save(user);

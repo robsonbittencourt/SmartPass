@@ -31,7 +31,7 @@ public class Credential {
 	@JoinColumn(name = "credential_password")
 	private Password password;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "credential_users")
 	private User user;
 
