@@ -37,7 +37,13 @@
 		          	</form>
 		      	</div>
 		      	<div class="modal-footer">
-		          	
+		          	<div class="col-md-12">
+		          	<ul>
+						<c:forEach items="${errors}" var="error">
+			 				<li>${error.message}</li>
+						</c:forEach>
+					</ul>
+					</div>
 		      	</div>
 		  	</div>
 	  	</div>

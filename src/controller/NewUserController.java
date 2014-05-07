@@ -1,17 +1,22 @@
 package controller;
 
-import helper.RandomString;
+import helper.Inrestrict;
+
+import java.util.Random;
+
 import model.Password;
 import model.User;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 
 import com.google.inject.Inject;
 
 import dao.UserDao;
-import encryption.AES;
+import encryption.CaesarCipher;
 
 @Resource
 public class NewUserController {
@@ -19,11 +24,13 @@ public class NewUserController {
 	@Inject
 	private Result result;
 	@Inject
-	private AES aes;
+	private Validator validator;
 	@Inject
-	private RandomString randomString;
+	private CaesarCipher caesarCipher;
+
 		
 	@Get("/newuser")
+	@Inrestrict
 	public void newUser() {
 		Password password = new Password();
 		User user = new User();
@@ -32,27 +39,28 @@ public class NewUserController {
 	}
 	
 	@Post("/newuser")
+	@Inrestrict
 	public void createNewUser(User user) {
 		UserDao userDao = new UserDao();
+		if(userDao.findByLogin(user.getLogin()) != null) {
+			validator.add(new ValidationMessage("Login já existe", "usuario.login"));
+		}
+		validator.onErrorUsePageOf(NewUserController.class).newUser();
+
+		Random random = new Random();
+		int randomNumber = random.nextInt(26);
 		
 		String password = user.getPassword().getPassword();
-		user.setPassword(getPasswordWithEncryptedKeys(password));
+		user.getPassword().setCaesarNumber(randomNumber);
+		
+		String caesarEncrypted = caesarCipher.encrypt(randomNumber, password);
+		user.getPassword().setCaesarEncrypted(caesarEncrypted);
+		
 		userDao.save(user);
 		
-		result.redirectTo(IndexController.class).index();
+		result.include("message", "Usuário criado com sucesso. Realize seu login.");
+		result.redirectTo(LoginController.class).login();
 	}
 	
-	private Password getPasswordWithEncryptedKeys(String plainText) {
-		Password password = new Password();
-		
-		password.setEncryptionKey(randomString.generateRandomString(16));
-		password.setIV(randomString.generateRandomString(16));
-		
-		try {
-			password.setCipherText(aes.encrypt(plainText, password.getEncryptionKey(), password.getIV()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return password;
-	}
+	
 }

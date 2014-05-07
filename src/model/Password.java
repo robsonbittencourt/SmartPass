@@ -38,6 +38,12 @@ public class Password {
 	@Column(name = "password_cipher_text")
 	private byte[] cipherText;
 	
+	@Column(name = "password_caesar_number")
+	private int caesarNumber;
+	
+	@Column(name = "password_caesar_encrypted")
+	private String caesarEncrypted;
+	
 	public Password() {
 		this.weakWeight = 0;
 		this.mediumWeight = 0;
@@ -106,6 +112,22 @@ public class Password {
 
 	public void setCipherText(byte[] cipherText) {
 		this.cipherText = cipherText;
+	}
+
+	public int getCaesarNumber() {
+		return caesarNumber;
+	}
+
+	public void setCaesarNumber(int randomNumber) {
+		this.caesarNumber = randomNumber;
+	}
+
+	public String getCaesarEncrypted() {
+		return caesarEncrypted;
+	}
+
+	public void setCaesarEncrypted(String caesarEncrypted) {
+		this.caesarEncrypted = caesarEncrypted;
 	}
 
 	

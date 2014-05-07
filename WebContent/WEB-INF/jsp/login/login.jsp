@@ -23,12 +23,12 @@
 		        	<h1 class="text-center">SmartPass Login</h1>
 		      	</div>
 		      	<div class="modal-body">
-		          	<form method="post" action="/SmartPass/login/newuser" class="form col-md-12 center-block">
+		          	<form method="post" action="/SmartPass/login" class="form col-md-12 center-block">
 		            	<div class="form-group">
-		              		<input type="text" class="form-control input-lg" placeholder="Login">
+		              		<input type="text" name="user.login" class="form-control input-lg" placeholder="Login">
 		            	</div>
 		            	<div class="form-group">
-		              		<input type="password" class="form-control input-lg" placeholder="Senha">
+		              		<input type="password" name="user.password.password" class="form-control input-lg" placeholder="Senha">
 		            	</div>
 		            	<div class="form-group">
 		              		<button class="btn btn-primary btn-lg btn-block">Entrar</button>
@@ -37,7 +37,14 @@
 		          	</form>
 		      	</div>
 		      	<div class="modal-footer">
-		          	
+		          	<div class="col-md-12">
+          				${message}
+          				<ul>
+						<c:forEach items="${errors}" var="error">
+			 				<li>${error.message}</li>
+						</c:forEach>
+						</ul>
+		          	</div> 
 		      	</div>
 		  	</div>
 	  	</div>

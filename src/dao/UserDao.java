@@ -26,6 +26,10 @@ protected Session session;
 		return getByCriteria(eq("id", identifier));
 	}
 	
+	public User findByLogin(String login) {
+		return getByCriteria(eq("login", login));
+	}
+	
 	@SuppressWarnings("unchecked")
 	public User getByCriteria(Criterion... criterions) {
 		Criteria criteria = createCriteria(criterions);
@@ -59,5 +63,7 @@ protected Session session;
 		session.delete(user);
 		tx.commit();
 	}
+
+	
 	
 }

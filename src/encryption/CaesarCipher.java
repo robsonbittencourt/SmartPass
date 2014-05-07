@@ -1,5 +1,8 @@
 package encryption;
+
+import br.com.caelum.vraptor.ioc.Component;
  
+@Component
 public class CaesarCipher {
 	
 	public String encrypt(int encryptionKey, String plainText){
