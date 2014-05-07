@@ -11,6 +11,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 
+import br.com.caelum.vraptor.ioc.Component;
+
+@Component
 public class UserDao {
 
 protected Session session;

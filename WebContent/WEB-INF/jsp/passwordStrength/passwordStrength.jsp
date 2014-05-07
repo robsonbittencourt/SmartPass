@@ -21,7 +21,7 @@
 	  			${password.strongWeight}% forte</br>
 			</div>
   		</form>	
-  		
+  	  		
 	</div>
 <jsp:include page="/WEB-INF/jsp/footer.jsp"/>
 

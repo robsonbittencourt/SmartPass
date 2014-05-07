@@ -10,6 +10,7 @@
 <title>SmartPass</title>
 <link href="/SmartPass/resource/css/bootstrap.css" rel="stylesheet">
 <link href="/SmartPass/resource/css/SmartPass.css" rel="stylesheet">
+<link href="/SmartPass/resource/css/style.css" rel="stylesheet">
 <script src="/SmartPass/resource/js/jquery-2.1.0.min.js"></script>
 <script src="/SmartPass/resource/js/jquery.decimalMask.js"></script>
 </head>
