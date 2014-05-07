@@ -32,7 +32,7 @@
 						<ul class="nav navbar-nav">
 							<li id="verify-strength"><a href="/SmartPass/passwordStrength">Verificar força</a></li>
 							<li id="generate-password"><a href="/SmartPass/generatePassword">Gerar senha</a></li>
-							<li id="manage-credential"><a href="#">Gerenciar credenciais</a></li>
+							<li id="manage-credential"><a href="/SmartPass/manageCredential">Gerenciar credenciais</a></li>
 							<li id="import-credential"><a href="#">Importar Credenciais</a></li>
 							<li id="import-credential"><a href="#">Exportar Credenciais</a></li>
 						</ul>	

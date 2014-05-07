@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -29,6 +30,10 @@ public class Credential {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "credential_password")
 	private Password password;
+	
+	@ManyToOne
+	@JoinColumn(name = "credential_users")
+	private User user;
 	
 	public long getId() {
 		return id;
@@ -60,6 +65,14 @@ public class Credential {
 	
 	public void setPassword(Password password) {
 		this.password = password;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
