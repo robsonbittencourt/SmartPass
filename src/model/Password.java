@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 @Entity(name="password")
 @SequenceGenerator(name = "password_id", sequenceName = "password_id")
@@ -16,20 +17,26 @@ public class Password {
 	@Column(name = "password_id")
 	private long id;
 	
-	@Column(name = "password_password")
+	@Transient
 	private String password;
 	
-	@Column(name = "password_status")
-	private String status;
-	
-	@Column(name = "password_weak_weight")
+	@Transient
 	private double weakWeight;
 	
-	@Column(name = "password_medium_weight")
+	@Transient
 	private double mediumWeight;
 	
-	@Column(name = "password_strong_weight")
+	@Transient
 	private double strongWeight;
+	
+	@Column(name = "password_encryption_key")
+	private String encryptionKey;
+	
+	@Column(name = "password_iv")
+	private String IV;
+	
+	@Column(name = "password_cipher_text")
+	private byte[] cipherText;
 	
 	public Password() {
 		this.weakWeight = 0;
@@ -53,14 +60,6 @@ public class Password {
 		this.password = password;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setMessageStatus(String status) {
-		this.status = status;
-	}
-	
 	public double getWeakWeight() {
 		return weakWeight;
 	}
@@ -84,5 +83,30 @@ public class Password {
 	public void setStrongWeigth(double strongWeight) {
 		this.strongWeight = strongWeight;
 	}
+	
+	public String getEncryptionKey() {
+		return encryptionKey;
+	}
+
+	public void setEncryptionKey(String encryptionKey) {
+		this.encryptionKey = encryptionKey;
+	}
+
+	public String getIV() {
+		return IV;
+	}
+
+	public void setIV(String iV) {
+		IV = iV;
+	}
+
+	public byte[] getCipherText() {
+		return cipherText;
+	}
+
+	public void setCipherText(byte[] cipherText) {
+		this.cipherText = cipherText;
+	}
+
 	
 }

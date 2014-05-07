@@ -10,7 +10,6 @@ public class PasswordService {
 		Password password = new Password();
 		password.setId(1);
 		password.setPassword("123");
-		password.setMessageStatus("weak");
 		return password;
 	}
 	

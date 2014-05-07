@@ -3,7 +3,7 @@
 
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
 
-	<div class="form">
+	<div class="form-large">
 
 		<legend>Gerenciamento de senhas</legend>
 
@@ -36,28 +36,30 @@
   				</div>
   		</form>	
   		
-  		<table class="table table-striped">
-  			<tr>
-      				<td>Sistema</td>
-      				<td>Usuário</td>
-      				<td>Senha</td>
-    		</tr>
-  			<c:forEach items="${credentialList}" var="credential">
-   				<tr>
-      				<td>${credential.system}</td>
-      				<td>${credential.login}</td>
-      				<td>${credential.password.password}</td>
-      				<td>
-      					<a href="/SmartPass/manageCredential/edit/${credential.id}">
-      						<button type="button" class="btn btn-info" >Editar</button>
-      					</a>
-      					<a href="/SmartPass/manageCredential/delete/${credential.id}">
-      						<button type="button" class="btn btn-danger">Excluir</button>
-      					</a>
-      				</td>
-    			</tr>
-  			</c:forEach>
-		</table>  				
+  		<div class="scroll-table">
+	  		<table class="table table-striped">
+	  			<tr>
+	      				<td>Sistema</td>
+	      				<td>Usuário</td>
+	      				<td>Senha</td>
+	    		</tr>
+	  			<c:forEach items="${credentialList}" var="credential">
+	   				<tr>
+	      				<td>${credential.system}</td>
+	      				<td>${credential.login}</td>
+	      				<td>${credential.password.password}</td>
+	      				<td>
+	      					<a href="/SmartPass/manageCredential/edit/${credential.id}">
+	      						<button type="button" class="btn btn-info" >Editar</button>
+	      					</a>
+	      					<a href="/SmartPass/manageCredential/delete/${credential.id}">
+	      						<button type="button" class="btn btn-danger">Excluir</button>
+	      					</a>
+	      				</td>
+	    			</tr>
+	  			</c:forEach>
+			</table>  	
+		</div>				
 	</div>
 	
 <jsp:include page="/WEB-INF/jsp/footer.jsp"/>

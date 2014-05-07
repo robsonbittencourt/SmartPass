@@ -5,7 +5,6 @@ import static org.hibernate.criterion.Restrictions.eq;
 import java.util.List;
 
 import model.Credential;
-import model.User;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;

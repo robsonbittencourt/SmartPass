@@ -9,7 +9,7 @@
 		<form method="post" action="passwordStrength" class="form-inline">
     		<label class="control-label" for="password_id">Senha</label>
 			<div class="form-group has-feedback">
-    			<input type="password" name="password.password" class="form-control" id="password_id" placeholder="${password.status}">
+    			<input type="password" name="password.password" class="form-control" id="password_id" placeholder="${message}">
     			<span class="glyphicon form-control-feedback"></span>
   			</div>	
   			<button type="submit" class="btn btn-primary">Verificar</button>
@@ -30,15 +30,15 @@
 		$("#verify-strength").addClass("active");
 				
 		<c:choose>
-        	<c:when test="${password.status eq 'Senha forte'}">
+        	<c:when test="${message eq 'Senha forte'}">
         		$(".form-group").addClass("has-success");
         		$(".glyphicon").addClass("glyphicon-ok");
         	</c:when>
-        	<c:when test="${password.status eq 'Senha média'}">
+        	<c:when test="${message eq 'Senha média'}">
 	        	$(".form-group").addClass("has-warning");
 	    		$(".glyphicon").addClass("glyphicon-warning-sign");
         	</c:when>
-        	<c:when test="${password.status eq 'Senha fraca'}">
+        	<c:when test="${message eq 'Senha fraca'}">
         		$(".form-group").addClass("has-error");
     			$(".glyphicon").addClass("glyphicon-remove");
     		</c:when>

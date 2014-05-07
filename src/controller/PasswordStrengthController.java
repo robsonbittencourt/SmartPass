@@ -37,7 +37,7 @@ public class PasswordStrengthController {
 	public void passwordStrength(Password password) {
 		if(password.getPassword() != null) {
 			PasswordStrengthType passwordStreght = service.verifyPasswordStrenght(password, getAllPasswordCheckers());
-			password.setMessageStatus(passwordStreght.getStatus());
+			result.include("message", passwordStreght.getStatus());
 		}
 		result.include("password", password);
 	}

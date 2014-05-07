@@ -6,6 +6,9 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import br.com.caelum.vraptor.ioc.Component;
+
+@Component
 public class AES {
 
 	private static final int BLOCK_SIZE = 16;

@@ -4,6 +4,12 @@
 	padding: 10px;
 }
 
+.form-large {
+	margin: 0 auto;
+	width: 600px;
+	padding: 10px;
+}
+
 .nav-menu {
 	margin-top: 2%;
 	margin-bottom: -3%;
@@ -11,4 +17,9 @@
 
 .box {
 	margin-top: 5%;
+}
+
+.scroll-table {  
+    height: 350px !important;
+    overflow: scroll;
 }
