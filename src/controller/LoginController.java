@@ -42,7 +42,6 @@ public class LoginController {
 	@Inrestrict
 	public void doLogin(User user) {
 		UserDao userDao = new UserDao();
-		
 		User baseUser = userDao.findByLogin(user.getLogin());
 		
 		if(baseUser != null) {

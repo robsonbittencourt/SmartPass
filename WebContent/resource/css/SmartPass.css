@@ -6,7 +6,7 @@
 
 .form-large {
 	margin: 0 auto;
-	width: 600px;
+	width: 1000px;
 	padding: 10px;
 }
 
@@ -19,7 +19,14 @@
 	margin-top: 5%;
 }
 
+.floated {
+	display:block;
+	float:left;
+	width: 450px;
+}
+
 .scroll-table {  
-    height: 350px !important;
+    height: 250px !important;
+    float: right;
     overflow: scroll;
 }

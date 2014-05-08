@@ -1,6 +1,7 @@
 package controller;
 
 import helper.RandomString;
+import helper.UserSession;
 import model.Credential;
 import model.Password;
 import service.CredentialService;
@@ -27,6 +28,8 @@ public class ManageCredentialController {
 	private AES aes;
 	@Inject
 	private RandomString randomString;
+	@Inject
+	private UserSession session;
 	
 	
 	@Get("/manageCredential")
@@ -36,7 +39,7 @@ public class ManageCredentialController {
 	
 	@Post("/manageCredential/save")
 	public void save(Credential credential) {
-		credential.setUser(userService.findById(1));
+		credential.setUser(userService.findById(session.getLoggedUser().getId()));
 		credential.setPassword(getPasswordWithEncryptedKeys(credential.getPassword().getPassword()));
 		credentialService.saveOrUpdate(credential);
 		
@@ -47,14 +50,14 @@ public class ManageCredentialController {
 	public void edit(long id) {
 		Credential credential = credentialService.findById(id);
 		credential.setPassword(getPasswordWithEncryptedKeys(credential.getPassword().getPassword()));
-		result.forwardTo(this).manageCredential(credential);
+		result.redirectTo(this).manageCredential(credential);
 	}
 	
 	@Get("/manageCredential/delete/{id}")
 	public void delete(long id) {
 		Credential credential = credentialService.findById(id);
 		credentialService.delete(credential);
-		result.forwardTo(this).manageCredential();
+		result.redirectTo(this).manageCredential();
 	}
 		
 	public void manageCredential(Credential credential) {

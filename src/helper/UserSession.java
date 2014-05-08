@@ -11,14 +11,22 @@ public class UserSession {
 	private User loggedUser;
 
 	public void login(User user) {
-		this.loggedUser = user;
+		this.setLoggedUser(user);
 	}
   
 	public boolean isLogged() {
-		return loggedUser != null;
+		return getLoggedUser() != null;
 	}
 	
 	public void logout() {
-		loggedUser = null;
+		setLoggedUser(null);
+	}
+
+	public User getLoggedUser() {
+		return loggedUser;
+	}
+
+	public void setLoggedUser(User loggedUser) {
+		this.loggedUser = loggedUser;
 	}
 }

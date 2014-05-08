@@ -1,5 +1,7 @@
 package service;
 
+import helper.UserSession;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +20,11 @@ public class UserService {
 	private UserDao dao;
 	@Inject
 	private AES aes;
+	@Inject
+	private UserSession session;
 	
 	public List<Credential> getAllCredentials() {
-		User user = dao.findById(1);
+		User user = dao.findById(session.getLoggedUser().getId());
 		if(user != null) {
 			List<Credential> credentials = user.getCredentials();
 			for (Credential credential : credentials) {

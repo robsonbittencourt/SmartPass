@@ -7,6 +7,7 @@
 
 		<legend>Gerenciamento de senhas</legend>
 
+		<div class="floated">
 		<form method="post" action="/SmartPass/manageCredential/save" class="form-horizontal" role="form">
 				<input type="hidden" name="credential.id" value="${credential.id}" />
     			<div class="form-group">
@@ -35,8 +36,8 @@
     				</div>
   				</div>
   		</form>	
-  		
-  		<div class="scroll-table">
+  		</div>
+  		<div class="floated scroll-table">
 	  		<table class="table table-striped">
 	  			<tr>
 	      				<td>Sistema</td>
