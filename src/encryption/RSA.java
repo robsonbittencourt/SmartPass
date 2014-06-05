@@ -12,7 +12,7 @@ import java.security.PublicKey;
 
 import javax.crypto.Cipher;
 
-public class EncryptionUtil {
+public class RSA {
 
 	public static final String ALGORITHM = "RSA";
 	public static final String PRIVATE_KEY_FILE = "C:/keys/private.key";
