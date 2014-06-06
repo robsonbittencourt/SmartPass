@@ -1,86 +1,71 @@
-// Adapting for: http://javadigest.wordpress.com/2012/08/26/rsa-encryption-example/
-
 package encryption;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-
-import javax.crypto.Cipher;
+import helper.RandomHelper;
 
 public class RSA {
-
-	public static final String ALGORITHM = "RSA";
-	public static final String PRIVATE_KEY_FILE = "C:/keys/private.key";
-	public static final String PUBLIC_KEY_FILE = "C:/keys/public.key";
-
-	public void generateKey() {
-		try {
-			KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
-			keyGen.initialize(1024);
-			KeyPair key = keyGen.generateKeyPair();
-
-			File privateKeyFile = new File(PRIVATE_KEY_FILE);
-			File publicKeyFile = new File(PUBLIC_KEY_FILE);
-
-			if (privateKeyFile.getParentFile() != null) {
-				privateKeyFile.getParentFile().mkdirs();
-			}
-			privateKeyFile.createNewFile();
-
-			if (publicKeyFile.getParentFile() != null) {
-				publicKeyFile.getParentFile().mkdirs();
-			}
-			publicKeyFile.createNewFile();
-
-			ObjectOutputStream publicKeyOS = new ObjectOutputStream(new FileOutputStream(publicKeyFile));
-			publicKeyOS.writeObject(key.getPublic());
-			publicKeyOS.close();
-
-			ObjectOutputStream privateKeyOS = new ObjectOutputStream(new FileOutputStream(privateKeyFile));
-			privateKeyOS.writeObject(key.getPrivate());
-			privateKeyOS.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+	
+	private static final int LAST_ASCII_CODE = 127;
+	private RandomHelper randomHelper = new RandomHelper();
+	
+	private int p;
+	private int q;
+	public int e;
+	
+	public void generateVariablePandVariableQ() {
+		p = getRandomPrimeNumber();
+		q = getRandomPrimeNumber();
+	}
+	
+	public int getVariableN() {
+		while(true) {
+			int n = p * q;
+			if(n > LAST_ASCII_CODE)
+				return n;
 		}
 	}
-
-	public boolean areKeysPresent() {
-		File privateKey = new File(PRIVATE_KEY_FILE);
-		File publicKey = new File(PUBLIC_KEY_FILE);
-
-		if (privateKey.exists() && publicKey.exists()) {
-			return true;
+	
+	public int getVariableZ() {
+		generateVariablePandVariableQ();
+		return (p - 1) * (q - 1);
+	}
+	
+	public void generateVariableE() {
+		while(true) {
+			int randomInteger = randomHelper.getRandomPositiveInteger();
+			if(isCoPrimeNumbers(getVariableZ(), randomInteger)){
+				e = randomInteger;
+				return;
+			}	
 		}
-		return false;
+	}
+	
+	public int getRandomPrimeNumber() {
+		while(true) {
+			int randomInteger = randomHelper.getRandomPositiveInteger();
+			if(isPrimeNumber(randomInteger)) 
+				return randomInteger;
+		}
+	}
+	
+	public boolean isPrimeNumber(int n) {
+		if (n % 2 == 0)
+		   	return false;
+		
+		for(int i=3;i*i<=n;i+=2) {
+			if(n%i==0)
+		      	return false;
+		}
+		return true;
+	}
+	
+	public boolean isCoPrimeNumbers(int x, int y) {
+		while (y != 0) {
+            int temp = y;
+            y = x % y;
+            x = temp;
+        }
+        return x == 1 ? true : false;
 	}
 
-	public byte[] encrypt(String text, PublicKey key) {
-		byte[] cipherText = null;
-		try {
-			Cipher cipher = Cipher.getInstance(ALGORITHM);
-			cipher.init(Cipher.ENCRYPT_MODE, key);
-			cipherText = cipher.doFinal(text.getBytes());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return cipherText;
-	}
-
-	public String decrypt(byte[] text, PrivateKey key) {
-		byte[] dectyptedText = null;
-		try {
-			Cipher cipher = Cipher.getInstance(ALGORITHM);
-			cipher.init(Cipher.DECRYPT_MODE, key);
-			dectyptedText = cipher.doFinal(text);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return new String(dectyptedText);
-	}
-
+	
 }

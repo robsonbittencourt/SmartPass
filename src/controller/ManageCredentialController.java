@@ -1,6 +1,6 @@
 package controller;
 
-import helper.RandomString;
+import helper.RandomHelper;
 import helper.UserSession;
 import model.Credential;
 import model.Password;
@@ -27,7 +27,7 @@ public class ManageCredentialController {
 	@Inject
 	private AES aes;
 	@Inject
-	private RandomString randomString;
+	private RandomHelper randomHelper;
 	@Inject
 	private UserSession session;
 	
@@ -68,8 +68,8 @@ public class ManageCredentialController {
 	private Password getPasswordWithEncryptedKeys(String plainText) {
 		Password password = new Password();
 		
-		password.setEncryptionKey(randomString.generateRandomString(16));
-		password.setIV(randomString.generateRandomString(16));
+		password.setEncryptionKey(randomHelper.generateRandomString(16));
+		password.setIV(randomHelper.generateRandomString(16));
 		
 		try {
 			password.setCipherText(aes.encrypt(plainText, password.getEncryptionKey(), password.getIV()));

@@ -5,10 +5,11 @@ import java.util.Random;
 import br.com.caelum.vraptor.ioc.Component;
 
 @Component
-public class RandomString {
+public class RandomHelper {
+	
+	private Random random = new Random();
 	
 	public String generateRandomString(int length) {
-		Random random = new Random();
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			switch (random.nextInt(4)) {
@@ -29,7 +30,6 @@ public class RandomString {
 	}
 	
 	private Character generateRandomSpecialCharacter() {
-		Random random = new Random();
 		switch (random.nextInt(3)) {
 			case 0:
 				return new Character((char) (33 + random.nextInt((47 + 1 - 33))));
@@ -37,5 +37,14 @@ public class RandomString {
 				return new Character((char) (58 + random.nextInt((64 + 1 - 58))));
 		}
 		return new Character((char) (91 + random.nextInt((96 + 1 - 91))));
+	}
+	
+	public int getRandomPositiveInteger() {
+		int randomInteger;
+		while(true) {
+			randomInteger = random.nextInt();
+			if (randomInteger > 0) 
+				return randomInteger;
+		}
 	}
 }

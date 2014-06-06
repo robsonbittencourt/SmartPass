@@ -1,7 +1,7 @@
 package service;
 
 import static type.PasswordStrengthType.STRONG;
-import helper.RandomString;
+import helper.RandomHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class GeneratePasswordService {
 	@Inject
 	private PasswordStrengthService passwordStrengthService;
 	@Inject
-	private RandomString randomString;
+	private RandomHelper randomString;
 	
 	public String generateRandomStrongPassword(int length) {
 		if(length > 9) {
