@@ -7,7 +7,7 @@ import model.RSAKeys;
 
 public class RSAEncryption {
 	
-	public String encryptWithPublic(RSAKeys keys, String plainText) {
+	public String encryptWithPublicKey(RSAKeys keys, String plainText) {
 		StringBuffer cryptedText = new StringBuffer();
 		List<Integer> plainTextInASCII = convertPlainTextToASCII(plainText);
 		
