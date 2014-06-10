@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 
 import dao.UserDao;
 import encryption.CaesarCipher;
-import encryption.RSAEncryption;
+import encryption.RSAKeysGenerator;
 
 @Resource
 public class NewUserController {
@@ -29,7 +29,7 @@ public class NewUserController {
 	@Inject
 	private CaesarCipher caesarCipher;
 	@Inject
-	RSAEncryption rsaEncription;
+	RSAKeysGenerator rsaEncription;
 		
 	@Get("/newuser")
 	@Inrestrict
@@ -45,7 +45,7 @@ public class NewUserController {
 	public void createNewUser(User user) {
 		UserDao userDao = new UserDao();
 		if(userDao.findByLogin(user.getLogin()) != null) {
-			validator.add(new ValidationMessage("Login já existe", "usuario.login"));
+			validator.add(new ValidationMessage("Login ja existe", "usuario.login"));
 		}
 		validator.onErrorUsePageOf(NewUserController.class).newUser();
 
@@ -62,7 +62,7 @@ public class NewUserController {
 		
 		userDao.save(user);
 		
-		result.include("message", "Usuário criado com sucesso. Realize seu login.");
+		result.include("message", "Usuario criado com sucesso. Realize seu login.");
 		result.redirectTo(LoginController.class).login();
 	}
 	
