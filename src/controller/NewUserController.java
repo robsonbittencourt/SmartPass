@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 
 import dao.UserDao;
 import encryption.CaesarCipher;
+import encryption.RSAEncryption;
 
 @Resource
 public class NewUserController {
@@ -27,7 +28,8 @@ public class NewUserController {
 	private Validator validator;
 	@Inject
 	private CaesarCipher caesarCipher;
-
+	@Inject
+	RSAEncryption rsaEncription;
 		
 	@Get("/newuser")
 	@Inrestrict
@@ -55,6 +57,8 @@ public class NewUserController {
 		
 		String caesarEncrypted = caesarCipher.encrypt(randomNumber, password);
 		user.getPassword().setCaesarEncrypted(caesarEncrypted);
+		
+		user.setRsaKeys(rsaEncription.createKeys());
 		
 		userDao.save(user);
 		

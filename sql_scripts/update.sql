@@ -73,6 +73,7 @@ CREATE TABLE users(
   users_login character varying(50),
   users_password bigint,
   users_credential bigint,
+  users_rsa_keys bigint,
 CONSTRAINT users_pkey PRIMARY KEY (users_id)
 )
 WITH (
@@ -81,6 +82,30 @@ WITH (
 
 ALTER TABLE users
   OWNER TO postgres;
+  
+--RSA_KEYS
+CREATE SEQUENCE rsa_keys_id
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE rsa_keys_id
+  OWNER TO postgres;
+
+CREATE TABLE rsa_keys(
+  rsa_keys_id bigint NOT NULL DEFAULT nextval('rsa_keys_id'::regclass),
+  rsa_keys_first character varying,
+  rsa_keys_last_public character varying,
+  rsa_keys_last_private character varying,
+CONSTRAINT rsa_keys_pkey PRIMARY KEY (rsa_keys_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE rsa_keys
+  OWNER TO postgres;
+  
 
 --FKs
 ALTER TABLE credential
@@ -102,4 +127,9 @@ ALTER TABLE users
 ADD CONSTRAINT users_credential_id_fkey
 FOREIGN KEY (users_credential)
 REFERENCES credential(credential_id);
+
+ALTER TABLE users
+ADD CONSTRAINT users_rsa_keys_id_fkey
+FOREIGN KEY (users_rsa_keys)
+REFERENCES rsa_keys(rsa_keys_id);
 

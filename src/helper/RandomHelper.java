@@ -42,7 +42,7 @@ public class RandomHelper {
 	public int getRandomPositiveInteger() {
 		int randomInteger;
 		while(true) {
-			randomInteger = random.nextInt();
+			randomInteger = random.nextInt(100000);
 			if (randomInteger > 0) 
 				return randomInteger;
 		}
