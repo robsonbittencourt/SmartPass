@@ -36,6 +36,7 @@ public class ExportCredentialsController {
 	@Post("/exportCredential/export")
 	public void exportCredentialFile(String credentialsIds) {
 		String csv = service.generateCsv(credentialsIds);
+		csv = service.addHashOnCsv(csv);
 		PrivateKey privateKey = session.getLoggedUser().getPrivateKey();
 		PublicKey publicKey = session.getLoggedUser().getPublicKey();
 		
