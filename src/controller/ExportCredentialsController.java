@@ -35,28 +35,20 @@ public class ExportCredentialsController {
 	
 	@Post("/exportCredential/export")
 	public void exportCredentialFile(String credentialsIds) {
-		String generateCsv = service.generateCsv(credentialsIds);
-		String text = "123";
+		String csv = service.generateCsv(credentialsIds);
 		PrivateKey privateKey = session.getLoggedUser().getPrivateKey();
 		PublicKey publicKey = session.getLoggedUser().getPublicKey();
 		
-		//TODO: Chaves fixa
+		//TODO: Chaves fixas
 		PublicKey publicKeyAnotherUser = new PublicKey();
-		publicKeyAnotherUser.setFirst("143");
-		publicKeyAnotherUser.setLast("7");
+		publicKeyAnotherUser.setFirst("237172541");
+		publicKeyAnotherUser.setLast("16105");
 		PrivateKey privateKeyAnotherUser =  new PrivateKey();
-		privateKeyAnotherUser.setFirst("143");
-		privateKeyAnotherUser.setLast("103");
+		privateKeyAnotherUser.setFirst("237172541");
+		privateKeyAnotherUser.setLast("185966329");
 		
-		String cryptedText1 = rsaEncryption.encryptWithRsaKey(privateKey, text);
-		String cryptedText = rsaEncryption.encryptWithRsaKey(publicKeyAnotherUser, cryptedText1);
-		String decryptedText = rsaEncryption.decryptWithRsaKey(privateKeyAnotherUser, cryptedText);
-		String decryptedText1 = rsaEncryption.decryptWithRsaKey(publicKey, decryptedText);
-		
-		System.out.println(text);
-		System.out.println(cryptedText1);
-		System.out.println(decryptedText);
-		System.out.println(decryptedText1);
+		String cryptedText = rsaEncryption.encryptWithRsaKey(privateKey, csv);
+		String cryptedTextWithAnotherKey = rsaEncryption.encryptWithRsaKey(publicKeyAnotherUser, cryptedText);
 		
 		result.include("credentialList", userService.getAllCredentials());
 		result.forwardTo(this).exportCredentialFile();

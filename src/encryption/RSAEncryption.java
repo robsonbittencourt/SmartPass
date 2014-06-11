@@ -45,7 +45,7 @@ public class RSAEncryption {
 			
 			BigInteger decrypted = cryptedLetter.modPow(keyTwo, keyOne);
 			
-			decryptedText.append(decrypted.intValue());
+			decryptedText.append((char)decrypted.intValue());
 		}
 				
 		return decryptedText.toString();

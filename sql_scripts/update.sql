@@ -74,6 +74,7 @@ CREATE TABLE users(
   users_password bigint,
   users_credential bigint,
   users_public_key bigint,
+  users_private_key bigint,
 CONSTRAINT users_pkey PRIMARY KEY (users_id)
 )
 WITH (
