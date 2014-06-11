@@ -1,5 +1,6 @@
 package controller;
 
+import service.ExportCredentialService;
 import service.UserService;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -15,6 +16,8 @@ public class ExportCredentialsController {
 	private Result result;
 	@Inject
 	private UserService userService;
+	@Inject 
+	private ExportCredentialService service;
 	
 	@Get("/exportCredential")
 	public void exportCredentialFile() {
@@ -23,12 +26,9 @@ public class ExportCredentialsController {
 	
 	@Post("/exportCredential/export")
 	public void exportCredentialFile(String credentialsIds) {
-		for (String credentialId : credentialsIds.split(",")) {
-			System.out.println(credentialId);
-		}
+		System.out.println(service.generateCsv(credentialsIds));
 		result.include("credentialList", userService.getAllCredentials());
 		result.forwardTo(this).exportCredentialFile();
 	}
-	
 	
 }
