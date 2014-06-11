@@ -2,9 +2,12 @@ package controller;
 
 import helper.Inrestrict;
 
+import java.util.List;
 import java.util.Random;
 
 import model.Password;
+import model.PrivateKey;
+import model.PublicKey;
 import model.User;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -18,6 +21,7 @@ import com.google.inject.Inject;
 import dao.UserDao;
 import encryption.CaesarCipher;
 import encryption.RSAKeysGenerator;
+import encryption.RsaKey;
 
 @Resource
 public class NewUserController {
@@ -58,7 +62,9 @@ public class NewUserController {
 		String caesarEncrypted = caesarCipher.encrypt(randomNumber, password);
 		user.getPassword().setCaesarEncrypted(caesarEncrypted);
 		
-		user.setRsaKeys(rsaEncription.createKeys());
+		List<RsaKey> keys = rsaEncription.createKeys();
+		user.setPublicKey((PublicKey)keys.get(0));
+		user.setPrivateKey((PrivateKey)keys.get(1));
 		
 		userDao.save(user);
 		

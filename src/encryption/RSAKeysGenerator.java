@@ -1,9 +1,12 @@
 package encryption;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 import helper.RandomHelper;
-import model.RSAKeys;
+import model.PrivateKey;
+import model.PublicKey;
 import br.com.caelum.vraptor.ioc.Component;
 
 import com.google.inject.Inject;
@@ -16,7 +19,7 @@ public class RSAKeysGenerator {
 	@Inject
 	private RandomHelper randomHelper = new RandomHelper();
 	
-	public RSAKeys createKeys() {
+	public List<RsaKey> createKeys() {
 		while(true) {
 			int p = getRandomPrimeNumber();
 			int q = getRandomPrimeNumber();
@@ -33,15 +36,18 @@ public class RSAKeysGenerator {
 				continue;
 			
 			if (isValidVariablesCombination(p, q, n, z, e, d)){
-				RSAKeys keys = new RSAKeys();
-				keys.setFirst(Integer.toString(n));
-				keys.setLastPublic(Integer.toString(e));
-				keys.setLastPrivate(Integer.toString(d));
+				List<RsaKey> keys = new ArrayList<RsaKey>();
 				
-				System.out.println("n: " + n);
-				System.out.println("z: " + z);
-				System.out.println("e: " + e);
-				System.out.println("d: " + d);
+				PublicKey publicKey = new PublicKey();
+				publicKey.setFirst(Integer.toString(n));
+				publicKey.setLast(Integer.toString(e));
+				
+				PrivateKey privateKey = new PrivateKey();
+				privateKey.setFirst(Integer.toString(n));
+				privateKey.setLast(Integer.toString(d));
+				
+				keys.add(publicKey);
+				keys.add(privateKey);
 				return keys;
 			}
 			

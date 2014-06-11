@@ -21,7 +21,8 @@
 	<mapping class="model.User" />
 	<mapping class="model.Password" />
 	<mapping class="model.Credential" />
-	<mapping class="model.RSAKeys" />
+	<mapping class="model.PublicKey" />
+	<mapping class="model.PrivateKey" />
 	
   </session-factory>
 </hibernate-configuration>

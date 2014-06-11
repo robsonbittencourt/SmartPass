@@ -35,8 +35,12 @@ public class User {
 	private List<Credential> credentials;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "users_rsa_keys")
-	private RSAKeys rsaKeys;
+	@JoinColumn(name = "users_public_key")
+	private PublicKey publicKey;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "users_private_key")
+	private PrivateKey privateKey;
 		
 	public long getId() {
 		return id;
@@ -69,13 +73,21 @@ public class User {
 	public void setCredentials(List<Credential> credentials) {
 		this.credentials = credentials;
 	}
-
-	public RSAKeys getRsaKeys() {
-		return rsaKeys;
+	
+	public PublicKey getPublicKey() {
+		return publicKey;
 	}
 
-	public void setRsaKeys(RSAKeys rsaKeys) {
-		this.rsaKeys = rsaKeys;
+	public void setPublicKey(PublicKey publicKey) {
+		this.publicKey = publicKey;
+	}
+
+	public PrivateKey getPrivateKey() {
+		return privateKey;
+	}
+
+	public void setPrivateKey(PrivateKey privateKey) {
+		this.privateKey = privateKey;
 	}
 	
 }

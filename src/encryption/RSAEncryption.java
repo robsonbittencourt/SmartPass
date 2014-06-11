@@ -4,11 +4,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.RSAKeys;
-
 public class RSAEncryption {
 	
-	public String encryptWithPublicKey(RSAKeys keys, String plainText) {
+	public String encryptWithRsaKey(RsaKey key, String plainText) {
 		StringBuffer cryptedText = new StringBuffer();
 		List<String> plainTextInBlocks = new ArrayList<String>();
 		
@@ -19,21 +17,21 @@ public class RSAEncryption {
 		}
 		
 		for (String block : plainTextInBlocks) {
-			BigInteger keyOne = new BigInteger(keys.getFirst());
-			BigInteger keyTwo = new BigInteger(keys.getLastPublic());
+			BigInteger keyOne = new BigInteger(key.getFirst());
+			BigInteger keyTwo = new BigInteger(key.getLast());
 			BigInteger letter = new BigInteger(block);
 			
 			BigInteger encrypted = letter.modPow(keyTwo, keyOne);
-			cryptedText.append(adjustEncrypted(Integer.parseInt(encrypted.toString()), keys.getFirst().length()));
+			cryptedText.append(adjustEncrypted(Integer.parseInt(encrypted.toString()), key.getFirst().length()));
 		}
 		return cryptedText.toString();
 	}
 	
-	public String decryptWithPrivateKey(RSAKeys keys, String cryptedText) {
+	public String decryptWithRsaKey(RsaKey key, String cryptedText) {
 		StringBuffer decryptedText = new StringBuffer();
 		List<String> cryptedBlocks = new ArrayList<String>();
 		
-		int blockSize = keys.getFirst().length();
+		int blockSize = key.getFirst().length();
 		int stopCondition = cryptedText.length() - (blockSize - 1);
 		
 		for (int i = 0; i < stopCondition; i += blockSize) {
@@ -41,8 +39,8 @@ public class RSAEncryption {
 		}
 		
 		for (String block : cryptedBlocks) {
-			BigInteger keyOne = new BigInteger(keys.getFirst());
-			BigInteger keyTwo = new BigInteger(keys.getLastPrivate());
+			BigInteger keyOne = new BigInteger(key.getFirst());
+			BigInteger keyTwo = new BigInteger(key.getLast());
 			BigInteger cryptedLetter = new BigInteger(block);
 			
 			BigInteger decrypted = cryptedLetter.modPow(keyTwo, keyOne);
@@ -67,11 +65,12 @@ public class RSAEncryption {
 	private String adjustEncrypted(int encrypted, int targetSize) {
 		String adjustedEncrypted = Integer.toString(encrypted);
 		
-		if(adjustedEncrypted.length() < targetSize)
-			for (int i = 0; i < targetSize - adjustedEncrypted.length(); i++) {
+		int stopCondition = targetSize - adjustedEncrypted.length();
+		if(adjustedEncrypted.length() < targetSize) {
+			for (int i = 0; i < stopCondition; i++) {
 				adjustedEncrypted = "0" + adjustedEncrypted;
 			}
-			
+		}	
 		return adjustedEncrypted;
 	}
 
