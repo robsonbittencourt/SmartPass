@@ -1,5 +1,5 @@
 .DS_Store
 *.project
 *.settings
-src/hibernate.cfg.xml
-*.prefs
+*.xml
+*.settings/org.eclipse.jdt.core.prefs
