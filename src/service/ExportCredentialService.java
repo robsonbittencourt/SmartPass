@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 
 import dao.CredentialDao;
 import encryption.AES;
+import encryption.MD5;
 import br.com.caelum.vraptor.ioc.Component;
 import model.Credential;
 import model.Password;
@@ -15,6 +16,17 @@ public class ExportCredentialService {
 	private CredentialDao credentialDao;
 	@Inject
 	private AES aes;
+	@Inject
+	private MD5 md5;
+	
+	public String addHashOnCsv(String csv) {
+		StringBuffer csvWithHash = new StringBuffer();
+		String hash = md5.generateHash(csv);
+		csvWithHash.append(csv);
+		csvWithHash.append(hash);
+		
+		return csvWithHash.toString();
+	}
 	
 	public String generateCsv(String credentialsIds) {
 		StringBuffer allCredentialsCsv = new StringBuffer();

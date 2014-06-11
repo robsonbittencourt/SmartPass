@@ -3,7 +3,10 @@ package encryption;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import br.com.caelum.vraptor.ioc.Component;
  
+@Component
 public class MD5 {
 	
 	public String generateHash(String text) {

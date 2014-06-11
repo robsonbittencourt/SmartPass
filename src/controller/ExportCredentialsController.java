@@ -12,7 +12,7 @@ import com.google.inject.Inject;
 @Resource
 public class ExportCredentialsController {
 	
-	@Inject
+	@Inject	
 	private Result result;
 	@Inject
 	private UserService userService;
@@ -26,7 +26,9 @@ public class ExportCredentialsController {
 	
 	@Post("/exportCredential/export")
 	public void exportCredentialFile(String credentialsIds) {
-		System.out.println(service.generateCsv(credentialsIds));
+		String generateCsv = service.generateCsv(credentialsIds);
+		service.addHashOnCsv(generateCsv);
+		
 		result.include("credentialList", userService.getAllCredentials());
 		result.forwardTo(this).exportCredentialFile();
 	}
