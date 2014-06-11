@@ -1,10 +1,12 @@
 package encryption;
 
-import com.google.inject.Inject;
+import java.math.BigInteger;
 
-import br.com.caelum.vraptor.ioc.Component;
-import model.RSAKeys;
 import helper.RandomHelper;
+import model.RSAKeys;
+import br.com.caelum.vraptor.ioc.Component;
+
+import com.google.inject.Inject;
 
 @Component
 public class RSAKeysGenerator {
@@ -35,8 +37,15 @@ public class RSAKeysGenerator {
 				keys.setFirst(Integer.toString(n));
 				keys.setLastPublic(Integer.toString(e));
 				keys.setLastPrivate(Integer.toString(d));
+				
+				System.out.println("n: " + n);
+				System.out.println("z: " + z);
+				System.out.println("e: " + e);
+				System.out.println("d: " + d);
 				return keys;
-			}	
+			}
+			
+			
 		}
 	}
 	
@@ -54,7 +63,11 @@ public class RSAKeysGenerator {
 	
 	private int getVariableE(int z) {
 		while(true) {
-			int randomInteger = randomHelper.getRandomPositiveInteger();
+			int randomInteger = randomHelper.getRandomPositive();
+			
+			if(randomInteger > z)
+				continue;
+			
 			if(isCoPrimeNumbers(z, randomInteger)){
 				return randomInteger;
 			}	
@@ -62,14 +75,18 @@ public class RSAKeysGenerator {
 	}
 	
 	private int getVariableD(int e, int z) {
-		int d = 1;
 		while(true) {
-			if(d > 999999999)
+			
+			BigInteger bigE = new BigInteger(Integer.toString(e));
+			BigInteger bigZ = new BigInteger(Integer.toString(z));
+			
+			try {
+				BigInteger bigD = new BigInteger(bigE.modInverse(bigZ).toString());
+				return Integer.parseInt(bigD.toString());
+			} catch (Exception e2) {
 				return 0;
-			if(((e * d) % z) == 1)
-				return d;
-			else 
-				d++;
+			}
+
 		}
 	}
 	
@@ -85,7 +102,7 @@ public class RSAKeysGenerator {
 	
 	private int getRandomPrimeNumber() {
 		while(true) {
-			int randomInteger = randomHelper.getRandomPositiveInteger();
+			int randomInteger = randomHelper.getRandomPositive();
 			if(isPrimeNumber(randomInteger)) 
 				return randomInteger;
 		}

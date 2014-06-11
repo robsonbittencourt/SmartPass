@@ -8,18 +8,6 @@ import model.RSAKeys;
 
 public class RSAEncryption {
 	
-	public static void main(String[] args) {
-		RSAEncryption encryption = new RSAEncryption();
-		RSAKeys keys = new RSAKeys();
-		keys.setFirst("2135836849");
-		keys.setLastPublic("75151");
-		keys.setLastPrivate("684985147");
-		String encryptedText = encryption.encryptWithPublicKey(keys, "rua");
-		String decryptedText = encryption.decryptWithPrivateKey(keys, encryptedText);
-		System.out.println(encryptedText);
-		System.out.println(decryptedText);
-	}
-	
 	public String encryptWithPublicKey(RSAKeys keys, String plainText) {
 		StringBuffer cryptedText = new StringBuffer();
 		List<String> plainTextInBlocks = new ArrayList<String>();
@@ -36,7 +24,7 @@ public class RSAEncryption {
 			BigInteger letter = new BigInteger(block);
 			
 			BigInteger encrypted = letter.modPow(keyTwo, keyOne);
-			cryptedText.append(encrypted);
+			cryptedText.append(adjustEncrypted(Integer.parseInt(encrypted.toString()), keys.getFirst().length()));
 		}
 		return cryptedText.toString();
 	}
@@ -59,7 +47,6 @@ public class RSAEncryption {
 			
 			BigInteger decrypted = cryptedLetter.modPow(keyTwo, keyOne);
 			
-			System.out.println(decrypted);
 			decryptedText.append((char)decrypted.intValue());
 		}
 				
@@ -71,20 +58,20 @@ public class RSAEncryption {
 		
 		for (int i = 0; i < plainText.length(); i++) {
 			char character = plainText.charAt(i); 
-			cryptedLetters.append(adjustEncrypted((int) character)); 
+			cryptedLetters.append(adjustEncrypted((int) character, 3)); 
 		}
 		
 		return cryptedLetters.toString();
 	}
 
-	private String adjustEncrypted(int encrypted) {
+	private String adjustEncrypted(int encrypted, int targetSize) {
 		String adjustedEncrypted = Integer.toString(encrypted);
 		
-		if(encrypted < 10)
-			adjustedEncrypted = "00" + adjustedEncrypted;
-		else if(encrypted < 100)
-			adjustedEncrypted = "0" + adjustedEncrypted;
-		
+		if(adjustedEncrypted.length() < targetSize)
+			for (int i = 0; i < targetSize - adjustedEncrypted.length(); i++) {
+				adjustedEncrypted = "0" + adjustedEncrypted;
+			}
+			
 		return adjustedEncrypted;
 	}
 

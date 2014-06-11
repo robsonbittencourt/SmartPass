@@ -39,7 +39,7 @@ public class RandomHelper {
 		return new Character((char) (91 + random.nextInt((96 + 1 - 91))));
 	}
 	
-	public int getRandomPositiveInteger() {
+	public int getRandomPositive() {
 		int randomInteger;
 		while(true) {
 			randomInteger = random.nextInt(100000);
