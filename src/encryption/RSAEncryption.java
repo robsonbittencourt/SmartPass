@@ -1,5 +1,6 @@
 package encryption;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,42 +8,85 @@ import model.RSAKeys;
 
 public class RSAEncryption {
 	
+	public static void main(String[] args) {
+		RSAEncryption encryption = new RSAEncryption();
+		RSAKeys keys = new RSAKeys();
+		keys.setFirst("2135836849");
+		keys.setLastPublic("75151");
+		keys.setLastPrivate("684985147");
+		String encryptedText = encryption.encryptWithPublicKey(keys, "rua");
+		String decryptedText = encryption.decryptWithPrivateKey(keys, encryptedText);
+		System.out.println(encryptedText);
+		System.out.println(decryptedText);
+	}
+	
 	public String encryptWithPublicKey(RSAKeys keys, String plainText) {
 		StringBuffer cryptedText = new StringBuffer();
-		List<Integer> plainTextInASCII = convertPlainTextToASCII(plainText);
+		List<String> plainTextInBlocks = new ArrayList<String>();
 		
-		for (Integer letter : plainTextInASCII) {
-			cryptedText.append((int)Math.pow(letter, Integer.parseInt(keys.getLastPublic()) % Integer.parseInt(keys.getFirst())));
+		String plainTextInASCII = convertPlainTextToASCII(plainText);
+				
+		for (int i = 0; i < plainTextInASCII.length() - 2; i += 3) {
+			plainTextInBlocks.add(plainTextInASCII.substring(i, i + 3));
 		}
 		
+		for (String block : plainTextInBlocks) {
+			BigInteger keyOne = new BigInteger(keys.getFirst());
+			BigInteger keyTwo = new BigInteger(keys.getLastPublic());
+			BigInteger letter = new BigInteger(block);
+			
+			BigInteger encrypted = letter.modPow(keyTwo, keyOne);
+			cryptedText.append(encrypted);
+		}
 		return cryptedText.toString();
 	}
 	
 	public String decryptWithPrivateKey(RSAKeys keys, String cryptedText) {
 		StringBuffer decryptedText = new StringBuffer();
-		List<Integer> cryptedBlocks = new ArrayList<Integer>();
+		List<String> cryptedBlocks = new ArrayList<String>();
 		
-		for (int i = 0; i < cryptedText.length() - 2; i = i + 3) {
-			cryptedBlocks.add(Integer.parseInt(cryptedText.substring(i, i + 2)));
+		int blockSize = keys.getFirst().length();
+		int stopCondition = cryptedText.length() - (blockSize - 1);
+		
+		for (int i = 0; i < stopCondition; i += blockSize) {
+			cryptedBlocks.add(cryptedText.substring(i, i + (blockSize)));
 		}
 		
-		for (Integer block : cryptedBlocks) {
-			decryptedText.append((int)Math.pow(block, Integer.parseInt(keys.getLastPrivate()) % Integer.parseInt(keys.getFirst())));
+		for (String block : cryptedBlocks) {
+			BigInteger keyOne = new BigInteger(keys.getFirst());
+			BigInteger keyTwo = new BigInteger(keys.getLastPrivate());
+			BigInteger cryptedLetter = new BigInteger(block);
+			
+			BigInteger decrypted = cryptedLetter.modPow(keyTwo, keyOne);
+			
+			System.out.println(decrypted);
+			decryptedText.append((char)decrypted.intValue());
 		}
 				
 		return decryptedText.toString();
 	}
 	
-	//TODO: Precisa colocar um zero na frente quando for menor 100.
-	public List<Integer> convertPlainTextToASCII(String plainText) {
-		List<Integer> cryptedLetters = new ArrayList<Integer>();
+	public String convertPlainTextToASCII(String plainText) {
+		StringBuffer cryptedLetters = new StringBuffer();
 		
 		for (int i = 0; i < plainText.length(); i++) {
 			char character = plainText.charAt(i); 
-			cryptedLetters.add((int) character); 
+			cryptedLetters.append(adjustEncrypted((int) character)); 
 		}
 		
-		return cryptedLetters;
+		return cryptedLetters.toString();
 	}
+
+	private String adjustEncrypted(int encrypted) {
+		String adjustedEncrypted = Integer.toString(encrypted);
+		
+		if(encrypted < 10)
+			adjustedEncrypted = "00" + adjustedEncrypted;
+		else if(encrypted < 100)
+			adjustedEncrypted = "0" + adjustedEncrypted;
+		
+		return adjustedEncrypted;
+	}
+
 
 }
