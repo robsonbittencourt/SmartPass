@@ -1,5 +1,8 @@
 package encryption;
 
+import helper.RandomHelper;
+
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
  
@@ -7,15 +10,18 @@ public class MD5 {
 	
 	public String generateHash(String text) {
         try {
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(text.getBytes());
-            byte messageDigest[] = digest.digest();
- 
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : messageDigest) {
-                hexString.append(Integer.toHexString(0xFF & b));
-            }
-            return hexString.toString();
+        	MessageDigest m = MessageDigest.getInstance("MD5");
+        	m.reset();
+        	m.update(text.getBytes());
+        	byte[] digest = m.digest();
+        	BigInteger bigInt = new BigInteger(1,digest);
+        	String hashtext = bigInt.toString(16);
+
+        	while(hashtext.length() < 32 ){
+        	  hashtext = "0"+hashtext;
+        	}
+        	
+        	return hashtext;
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
