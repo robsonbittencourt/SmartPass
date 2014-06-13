@@ -5,8 +5,11 @@
 
 	<div class="form">
 
-		<legend>Exportar arquivo de credenciais</legend>
-
+		<legend>
+			Exportar arquivo de credenciais
+			<button id="save_button" style="float:right" type="submit" class="btn btn-primary">Exportar</button>		
+  		</legend>
+		
 		<div class="floated scroll-table">
 	  		<table class="table table-striped">
 	  			<tr>
@@ -24,12 +27,13 @@
 	    			</tr>
 	  			</c:forEach>
 			</table>  	
+			
 			<form id="form_credentials" action="/SmartPass/exportCredential/export" method="post">
 				<input type="hidden" name="credentialsIds" id="credentialsIds" />
 			</form>
-			<button id="save_button" type="submit" class="btn btn-default">Salvar</button>
-		</div>				
-  		
+		</div>		
+		
+		
 	</div>
 	
 <jsp:include page="/WEB-INF/jsp/footer.jsp"/>

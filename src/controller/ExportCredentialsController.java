@@ -1,8 +1,13 @@
 package controller;
 
+import java.io.File;
+
+import javax.servlet.http.HttpServletResponse;
+
 import model.PrivateKey;
 import model.PublicKey;
 import helper.UserSession;
+import helper.WriteFile;
 import service.ExportCredentialService;
 import service.UserService;
 import br.com.caelum.vraptor.Get;
@@ -27,6 +32,10 @@ public class ExportCredentialsController {
 	private RSAEncryption rsaEncryption;
 	@Inject
 	private UserSession session;
+	@Inject
+	private HttpServletResponse response;
+	@Inject
+	private WriteFile writer;
 	
 	@Get("/exportCredential")
 	public void exportCredentialFile() {
@@ -51,8 +60,20 @@ public class ExportCredentialsController {
 		String cryptedText = rsaEncryption.encryptWithRsaKey(privateKey, csv);
 		String cryptedTextWithAnotherKey = rsaEncryption.encryptWithRsaKey(publicKeyAnotherUser, cryptedText);
 		
-		result.include("credentialList", userService.getAllCredentials());
-		result.forwardTo(this).exportCredentialFile();
+		result.redirectTo(this).getFile(cryptedTextWithAnotherKey);
+	}
+	
+	public File getFile(String text) {
+		return fileToDownload(writer.writeInFile(text), "credentials");
+	}
+	
+	private File fileToDownload(File file, String fileName) {
+		response.setHeader("Cache-Control", "public");
+		response.setHeader("Content-Description", "File Transfer");
+		response.setHeader("Content-Type", "text/txt");
+		response.setHeader("Content-Disposition", String.format("attachment; filename=%s.txt", fileName));
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		return file;
 	}
 	
 }

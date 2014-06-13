@@ -1,6 +1,6 @@
 .form {
 	margin: 0 auto;
-	width: 400px;
+	width: 470px;
 	padding: 10px;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .scroll-table {  
-    height: 250px !important;
+    height: 240px !important;
     float: right;
     overflow: scroll;
 }

@@ -34,7 +34,7 @@ public class ExportCredentialService {
 			Credential credential = credentialDao.findById(Long.parseLong(credentialId));
 			Password password = credential.getPassword();
 			try {
-				credential.getPassword().setPassword(aes.decrypt(password.getCipherText(), password.getEncryptionKey(), password.getIV()));
+				credential.getPassword().setPassword(aes.decrypt(password.getCipherText(), password.getEncryptionKey(), password.getIV()).trim());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
