@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import br.com.caelum.vraptor.ioc.Component;
 
+@Component
 public class WriteFile {
 	
 	public File writeInFile(String text) {

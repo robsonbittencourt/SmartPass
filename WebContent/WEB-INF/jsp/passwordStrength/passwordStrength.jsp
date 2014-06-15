@@ -9,7 +9,7 @@
 		<form method="post" action="passwordStrength" class="form-inline">
     		<label class="control-label" for="password_id">Senha</label>
 			<div class="form-group has-feedback">
-    			<input type="password" name="password.password" class="form-control" id="password_id" placeholder="${message}">
+    			<input type="password" size="38" name="password.password" class="form-control" id="password_id" placeholder="${message}">
     			<span class="glyphicon form-control-feedback"></span>
   			</div>	
   			<button type="submit" class="btn btn-primary">Verificar</button>
