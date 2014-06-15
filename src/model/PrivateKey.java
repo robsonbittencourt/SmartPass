@@ -13,6 +13,15 @@ import encryption.RsaKey;
 @SequenceGenerator(name = "private_key_id", sequenceName = "private_key_id")
 public class PrivateKey implements RsaKey{
 	
+	public PrivateKey() {
+
+	}	
+	
+	public PrivateKey(String key) {
+		setFirst(key.substring(0, key.indexOf(",")));
+		setLast(key.substring(key.indexOf(",") + 1));
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "private_key_id")
 	@Column(name = "private_key_id")

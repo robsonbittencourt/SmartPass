@@ -11,11 +11,11 @@
 				<legend>Informe a chave pública do destinatário</legend>
 				<label class="control-label" for="public_key_id">Chave Pública (separadas por vírgula)</label>
 				<div>
-					<textarea name="destinyPublicKey" rows="4" class="form-control" id="password_id"></textarea>
+					<textarea name="destinyPublicKey" rows="4" class="form-control" id="public_key_id"></textarea>
 				</div>
 			</div>
 				
-			<div class="floated-left scroll-table">
+			<div class="floated-right scroll-table">
 				<legend>
 					Selecione as credenciais
 					<button id="save_button" style="float:right" type="submit" class="btn btn-primary">Exportar</button>		

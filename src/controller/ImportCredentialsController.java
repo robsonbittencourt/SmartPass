@@ -20,7 +20,7 @@ public class ImportCredentialsController {
 	}
 	
 	@Post("/importCredential")
-	public void importCredentialFile(UploadedFile inputFile) {
-		service.importCredentialFile(inputFile);
+	public void importCredentialFile(UploadedFile inputFile, String senderPublicKey) {
+		service.importCredentialFile(inputFile, senderPublicKey);
 	}
 }

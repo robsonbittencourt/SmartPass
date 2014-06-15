@@ -1,13 +1,13 @@
 package controller;
 
+import helper.UserSession;
+import helper.WriteFile;
+
 import java.io.File;
 
 import javax.servlet.http.HttpServletResponse;
 
-import model.PrivateKey;
 import model.PublicKey;
-import helper.UserSession;
-import helper.WriteFile;
 import service.ExportCredentialService;
 import service.UserService;
 import br.com.caelum.vraptor.Get;
