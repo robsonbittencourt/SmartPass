@@ -19,9 +19,15 @@
 	margin-top: 5%;
 }
 
-.floated {
+.floated-left {
 	display:block;
 	float:left;
+	width: 450px;
+}
+
+.floated-right {
+	display:block;
+	float:right;
 	width: 450px;
 }
 

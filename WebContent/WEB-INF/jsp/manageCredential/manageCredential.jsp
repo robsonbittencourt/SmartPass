@@ -7,8 +7,8 @@
 
 		<legend>Gerenciamento de senhas</legend>
 
-		<div class="floated">
-		<form method="post" action="/SmartPass/manageCredential/save" class="form-horizontal" role="form">
+		<div class="floated-left">
+			<form method="post" action="/SmartPass/manageCredential/save" class="form-horizontal" role="form">
 				<input type="hidden" name="credential.id" value="${credential.id}" />
     			<div class="form-group">
     				<label class="col-sm-2 control-label" for="system_id">Sistema</label>
@@ -32,12 +32,13 @@
     			</div>
   				<div class="form-group">
     				<div class="col-sm-offset-0 col-sm-5">
-      					<button type="submit" class="btn btn-default">Salvar</button>
+      					<button type="submit" class="btn btn-primary">Salvar</button>
     				</div>
   				</div>
-  		</form>	
+	  		</form>	
   		</div>
-  		<div class="floated scroll-table">
+  		
+  		<div class="floated-left scroll-table">
 	  		<table class="table table-striped">
 	  			<tr>
 	      				<td>Sistema</td>

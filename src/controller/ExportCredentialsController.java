@@ -43,24 +43,21 @@ public class ExportCredentialsController {
 	}
 	
 	@Post("/exportCredential/export")
-	public void exportCredentialFile(String credentialsIds) {
+	public void exportCredentialFile(String credentialsIds, String destinyPublicKey) {
+		if (credentialsIds == null ) 
+			result.forwardTo(this).exportCredentialFile();
+		
 		String csv = service.generateCsv(credentialsIds);
 		csv = service.addHashOnCsv(csv);
-		PrivateKey privateKey = session.getLoggedUser().getPrivateKey();
-		PublicKey publicKey = session.getLoggedUser().getPublicKey();
 		
-		//TODO: Chaves fixas
 		PublicKey publicKeyAnotherUser = new PublicKey();
-		publicKeyAnotherUser.setFirst("237172541");
-		publicKeyAnotherUser.setLast("16105");
-		PrivateKey privateKeyAnotherUser =  new PrivateKey();
-		privateKeyAnotherUser.setFirst("237172541");
-		privateKeyAnotherUser.setLast("185966329");
+		publicKeyAnotherUser.setFirst(destinyPublicKey.substring(0, destinyPublicKey.indexOf(",")));
+		publicKeyAnotherUser.setLast(destinyPublicKey.substring(destinyPublicKey.indexOf(",") + 1));
 		
-		String cryptedText = rsaEncryption.encryptWithRsaKey(privateKey, csv);
-		String cryptedTextWithAnotherKey = rsaEncryption.encryptWithRsaKey(publicKeyAnotherUser, cryptedText);
+		String cryptedText = rsaEncryption.encryptWithRsaKey(session.getLoggedUser().getPrivateKey(), csv);
+		String cryptedTextWithAnotherUserKey = rsaEncryption.encryptWithRsaKey(publicKeyAnotherUser, cryptedText);
 		
-		result.redirectTo(this).getFile(cryptedTextWithAnotherKey);
+		result.redirectTo(this).getFile(cryptedTextWithAnotherUserKey);
 	}
 	
 	public File getFile(String text) {
