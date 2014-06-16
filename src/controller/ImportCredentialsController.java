@@ -23,4 +23,5 @@ public class ImportCredentialsController {
 	public void importCredentialFile(UploadedFile inputFile, String senderPublicKey) {
 		service.importCredentialFile(inputFile, senderPublicKey);
 	}
+	
 }

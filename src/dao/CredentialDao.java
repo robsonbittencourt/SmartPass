@@ -63,7 +63,5 @@ public class CredentialDao {
 		session.delete(credential);
 		tx.commit();
 	}
-
-	
 	
 }

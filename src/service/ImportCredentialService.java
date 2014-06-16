@@ -1,6 +1,5 @@
 package service;
 
-import helper.RandomHelper;
 import helper.UserSession;
 
 import java.io.BufferedReader;
@@ -15,7 +14,6 @@ import br.com.caelum.vraptor.ioc.Component;
 
 import com.google.inject.Inject;
 
-import encryption.AES;
 import encryption.MD5;
 import encryption.RSAEncryption;
 
@@ -32,11 +30,9 @@ public class ImportCredentialService {
 	@Inject
 	private CredentialService credentialService;
 	@Inject 
-	private RandomHelper randomHelper;
-	@Inject 
-	private AES aes;
-	@Inject 
 	private MD5 md5;
+	@Inject
+	private PasswordService passwordService;
 
 	public void importCredentialFile(UploadedFile inputFile, String senderPublicKey) {
 		String csv = getPlainCsvFromEncryptedCredentialFile(inputFile, senderPublicKey);
@@ -99,21 +95,8 @@ public class ImportCredentialService {
 	
 	public void importCredential(Credential credential) {
 		credential.setUser(userService.findById(session.getLoggedUser().getId()));
-		credential.setPassword(getPasswordWithEncryptedKeys(credential.getPassword().getPassword()));
+		credential.setPassword(passwordService.getPasswordWithEncryptedKeys(credential.getPassword().getPassword()));
 		credentialService.saveOrUpdate(credential);
 	}
 
-	private Password getPasswordWithEncryptedKeys(String plainText) {
-		Password password = new Password();
-		password.setEncryptionKey(randomHelper.generateRandomString(16));
-		password.setIV(randomHelper.generateRandomString(16));
-		
-		try {
-			password.setCipherText(aes.encrypt(plainText, password.getEncryptionKey(), password.getIV()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return password;
-	}
-	
 }

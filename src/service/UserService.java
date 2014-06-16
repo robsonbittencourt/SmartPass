@@ -29,6 +29,7 @@ public class UserService {
 			List<Credential> credentials = user.getCredentials();
 			for (Credential credential : credentials) {
 				Password password = credential.getPassword();
+				System.out.println(credential.getSystem());
 				
 				try {
 					credential.getPassword().setPassword(aes.decrypt(password.getCipherText(), password.getEncryptionKey(), password.getIV()));
@@ -45,16 +46,13 @@ public class UserService {
 	public User findById(long id) {
 		return dao.findById(id);
 	}
+	
+	public User findByLogin(String login) {
+		return dao.findByLogin(login);
+	}
 
 	public void save(User user) {
 		dao.save(user);
 	}
-	
-	public void update(User user) {
-		dao.update(user);
-	}
 
-	public void delete(User user) {
-		dao.delete(user);
-	}
 }

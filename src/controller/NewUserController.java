@@ -9,6 +9,7 @@ import model.Password;
 import model.PrivateKey;
 import model.PublicKey;
 import model.User;
+import service.UserService;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
@@ -18,7 +19,6 @@ import br.com.caelum.vraptor.validator.ValidationMessage;
 
 import com.google.inject.Inject;
 
-import dao.UserDao;
 import encryption.CaesarCipher;
 import encryption.RSAKeysGenerator;
 import encryption.RsaKey;
@@ -34,6 +34,8 @@ public class NewUserController {
 	private CaesarCipher caesarCipher;
 	@Inject
 	RSAKeysGenerator rsaEncription;
+	@Inject
+	private UserService userService;
 		
 	@Get("/newuser")
 	@Inrestrict
@@ -47,8 +49,7 @@ public class NewUserController {
 	@Post("/newuser")
 	@Inrestrict
 	public void createNewUser(User user) {
-		UserDao userDao = new UserDao();
-		if(userDao.findByLogin(user.getLogin()) != null) {
+		if(userService.findByLogin(user.getLogin()) != null) {
 			validator.add(new ValidationMessage("Login ja existe", "usuario.login"));
 		}
 		validator.onErrorUsePageOf(NewUserController.class).newUser();
@@ -66,11 +67,10 @@ public class NewUserController {
 		user.setPublicKey((PublicKey)keys.get(0));
 		user.setPrivateKey((PrivateKey)keys.get(1));
 		
-		userDao.save(user);
+		userService.save(user);
 		
 		result.include("message", "Usuario criado com sucesso. Realize seu login.");
 		result.redirectTo(LoginController.class).login();
 	}
-	
 	
 }
