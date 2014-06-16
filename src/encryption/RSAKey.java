@@ -1,6 +1,6 @@
 package encryption;
 
-public interface RsaKey {
+public interface RSAKey {
 	
 	String getFirst();
 	String getLast();

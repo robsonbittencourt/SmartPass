@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 
 import encryption.CaesarCipher;
 import encryption.RSAKeysGenerator;
-import encryption.RsaKey;
+import encryption.RSAKey;
 
 @Resource
 public class NewUserController {
@@ -63,7 +63,7 @@ public class NewUserController {
 		String caesarEncrypted = caesarCipher.encrypt(randomNumber, password);
 		user.getPassword().setCaesarEncrypted(caesarEncrypted);
 		
-		List<RsaKey> keys = rsaEncription.createKeys();
+		List<RSAKey> keys = rsaEncription.createKeys();
 		user.setPublicKey((PublicKey)keys.get(0));
 		user.setPrivateKey((PrivateKey)keys.get(1));
 		

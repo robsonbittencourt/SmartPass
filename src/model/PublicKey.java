@@ -7,11 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-import encryption.RsaKey;
+import encryption.RSAKey;
 
 @Entity(name="public_key")
 @SequenceGenerator(name = "public_key_id", sequenceName = "public_key_id")
-public class PublicKey implements RsaKey{
+public class PublicKey implements RSAKey{
 	
 	public PublicKey() {
 		

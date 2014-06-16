@@ -19,7 +19,7 @@ public class RSAKeysGenerator {
 	@Inject
 	private RandomHelper randomHelper = new RandomHelper();
 	
-	public List<RsaKey> createKeys() {
+	public List<RSAKey> createKeys() {
 		while(true) {
 			int p = getRandomPrimeNumber();
 			int q = getRandomPrimeNumber();
@@ -36,7 +36,7 @@ public class RSAKeysGenerator {
 				continue;
 			
 			if (isValidVariablesCombination(p, q, n, z, e, d)){
-				List<RsaKey> keys = new ArrayList<RsaKey>();
+				List<RSAKey> keys = new ArrayList<RSAKey>();
 				
 				PublicKey publicKey = new PublicKey();
 				publicKey.setFirst(Integer.toString(n));

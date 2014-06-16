@@ -6,7 +6,7 @@ import java.util.List;
 
 public class RSAEncryption {
 	
-	public String encryptWithRsaKey(RsaKey key, String plainText) {
+	public String encryptWithRsaKey(RSAKey key, String plainText) {
 		StringBuffer cryptedText = new StringBuffer();
 		List<String> plainTextInBlocks = new ArrayList<String>();
 		
@@ -27,7 +27,7 @@ public class RSAEncryption {
 		return cryptedText.toString();
 	}
 	
-	public String decryptWithRsaKey(RsaKey key, String cryptedText) {
+	public String decryptWithRsaKey(RSAKey key, String cryptedText) {
 		StringBuffer decryptedText = new StringBuffer();
 		List<String> cryptedBlocks = new ArrayList<String>();
 		
