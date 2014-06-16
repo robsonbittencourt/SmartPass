@@ -29,8 +29,6 @@ public class UserService {
 			List<Credential> credentials = user.getCredentials();
 			for (Credential credential : credentials) {
 				Password password = credential.getPassword();
-				System.out.println(credential.getSystem());
-				
 				try {
 					credential.getPassword().setPassword(aes.decrypt(password.getCipherText(), password.getEncryptionKey(), password.getIV()));
 				} catch (Exception e) {
