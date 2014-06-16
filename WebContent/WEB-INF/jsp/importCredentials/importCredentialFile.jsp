@@ -17,8 +17,12 @@
 				
 			<div class="floated-right">
 				<legend>Selecione o arquivo de credenciais</legend>
-				<input type="file" name="inputFile" />
-		  		<button type="submit" class="btn btn-primary">Importar</button>
+				<div style="float:left">
+					<input type="file" name="inputFile" />
+	  			</div>
+	  			<div style="float:right">
+	  				<button type="submit" class="btn btn-primary">Importar</button>
+	  			</div>
 			</div>		
 			
 		</form>	

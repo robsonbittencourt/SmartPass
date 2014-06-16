@@ -16,7 +16,7 @@ public class ImportCredentialsController {
 
 	@Get("/importCredential")
 	public void importCredentialFile() {
-		
+		//Just call JSP
 	}
 	
 	@Post("/importCredential")
