@@ -63,7 +63,5 @@ protected Session session;
 		session.delete(user);
 		tx.commit();
 	}
-
-	
 	
 }

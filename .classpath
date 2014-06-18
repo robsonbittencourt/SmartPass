@@ -30,5 +30,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Desenvolvimento/workspaces/SmartPass/WebContent/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Desenvolvimento/workspaces/SmartPass/WebContent/WEB-INF/lib/commons-codec-1.9.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
