@@ -36,6 +36,7 @@
 							<li id="manage-credential"><a href="/SmartPass/manageCredential">Gerenciar credenciais</a></li>
 							<li id="import-credential"><a href="/SmartPass/importCredential">Importar Credenciais</a></li>
 							<li id="export-credential"><a href="/SmartPass/exportCredential">Exportar Credenciais</a></li>
+							<li id="backup"><a href="/SmartPass/backup">Backup</a></li>
 							<li id="logout"><a href="/SmartPass/logout">Logout</a></li>
 						</ul>	
 					</div>

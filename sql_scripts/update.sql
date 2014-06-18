@@ -23,6 +23,7 @@ CREATE TABLE password(
   password_cipher_text bytea,
   password_caesar_number integer DEFAULT 0,
   password_caesar_encrypted character varying(50),
+  password_triple_des_key character varying(50),
 CONSTRAINT password_pkey PRIMARY KEY (password_id)
 )
 WITH (

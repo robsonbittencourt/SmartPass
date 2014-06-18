@@ -44,6 +44,9 @@ public class Password {
 	@Column(name = "password_caesar_encrypted")
 	private String caesarEncrypted;
 	
+	@Column(name = "password_triple_des_key")
+	private String tripleDesKey;
+	
 	public Password() {
 		this.weakWeight = 0;
 		this.mediumWeight = 0;
@@ -128,6 +131,14 @@ public class Password {
 
 	public void setCaesarEncrypted(String caesarEncrypted) {
 		this.caesarEncrypted = caesarEncrypted;
+	}
+
+	public String getTripleDesKey() {
+		return tripleDesKey;
+	}
+
+	public void setTripleDesKey(String tripleDesKey) {
+		this.tripleDesKey = tripleDesKey;
 	}
 
 	

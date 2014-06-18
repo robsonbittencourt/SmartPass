@@ -1,6 +1,7 @@
 package controller;
 
 import helper.Inrestrict;
+import helper.RandomHelper;
 
 import java.util.List;
 import java.util.Random;
@@ -36,6 +37,8 @@ public class NewUserController {
 	RSAKeysGenerator rsaEncription;
 	@Inject
 	private UserService userService;
+	@Inject
+	private RandomHelper randomHelper;
 		
 	@Get("/newuser")
 	@Inrestrict
@@ -62,6 +65,9 @@ public class NewUserController {
 		
 		String caesarEncrypted = caesarCipher.encrypt(randomNumber, password);
 		user.getPassword().setCaesarEncrypted(caesarEncrypted);
+		
+		String tripleDesKey = randomHelper.generateRandomString(50);
+		user.getPassword().setTripleDesKey(tripleDesKey);
 		
 		List<RSAKey> keys = rsaEncription.createKeys();
 		user.setPublicKey((PublicKey)keys.get(0));

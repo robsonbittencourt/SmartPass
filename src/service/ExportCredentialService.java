@@ -1,11 +1,17 @@
 package service;
 
+import helper.UserSession;
+import helper.WriteFile;
+
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import helper.UserSession;
-import helper.WriteFile;
+import model.Credential;
+import model.Password;
+import model.PublicKey;
+import br.com.caelum.vraptor.ioc.Component;
 
 import com.google.inject.Inject;
 
@@ -13,10 +19,7 @@ import dao.CredentialDao;
 import encryption.AES;
 import encryption.MD5;
 import encryption.RSAEncryption;
-import br.com.caelum.vraptor.ioc.Component;
-import model.Credential;
-import model.Password;
-import model.PublicKey;
+import encryption.TripleDES;
 
 @Component
 public class ExportCredentialService {
@@ -35,6 +38,10 @@ public class ExportCredentialService {
 	private HttpServletResponse response;
 	@Inject
 	private WriteFile writer;
+	@Inject
+	private UserService userService;
+	@Inject 
+	private TripleDES tripleDES;
 	
 	public File exportCredentialFile(String credentialsIds, String destinyPublicKey) {
 		String csv = generateCsv(credentialsIds);
@@ -46,7 +53,7 @@ public class ExportCredentialService {
 		
 		String cryptedText = rsaEncryption.encryptWithRsaKey(session.getLoggedUser().getPrivateKey(), csv);
 		String cryptedTextWithAnotherUserKey = rsaEncryption.encryptWithRsaKey(publicKeyAnotherUser, cryptedText);
-		return getFile(cryptedTextWithAnotherUserKey);
+		return getFile(cryptedTextWithAnotherUserKey, "credentials");
 	}
 	
 	private String addHashOnCsv(String csv) {
@@ -84,8 +91,19 @@ public class ExportCredentialService {
 		return csv.toString();
 	}
 	
-	private File getFile(String text) {
-		return fileToDownload(writer.writeInFile(text), "credentials");
+	private String generateCsv(List<Credential> credentials) {
+		StringBuffer csv = new StringBuffer();
+		
+		for (Credential credential : credentials) {
+			csv.append(generateCsv(credential));
+		}
+		
+		return csv.toString();
+	}
+	
+	private File getFile(String text, String fileName) {
+		File teste = writer.writeInFile(text);
+		return fileToDownload(teste, fileName);
 	}
 	
 	private File fileToDownload(File file, String fileName) {
@@ -97,4 +115,14 @@ public class ExportCredentialService {
 		return file;
 	}
 	
+	public File backupCredentials() {
+		String file = generateCsv(userService.getAllCredentials());
+		try {
+			file = tripleDES.encrypt(file, session.getLoggedUser().getPassword().getTripleDesKey());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return getFile(file, "backup");
+	}
+
 }

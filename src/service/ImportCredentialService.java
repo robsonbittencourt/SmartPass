@@ -16,6 +16,7 @@ import com.google.inject.Inject;
 
 import encryption.MD5;
 import encryption.RSAEncryption;
+import encryption.TripleDES;
 
 @Component
 public class ImportCredentialService {
@@ -33,10 +34,16 @@ public class ImportCredentialService {
 	private MD5 md5;
 	@Inject
 	private PasswordService passwordService;
+	@Inject 
+	private TripleDES tripleDES;
 
 	public void importCredentialFile(UploadedFile inputFile, String senderPublicKey) {
 		String csv = getPlainCsvFromEncryptedCredentialFile(inputFile, senderPublicKey);
-		importCrendentialsFromCsv(csv);
+		if(validateHashFromCsv(csv)) 
+			importCrendentialsFromCsv(csv, true);
+		 else 
+			System.out.println("O arquivo a ser importado não é o mesmo arquivo que foi enviado.");
+
 	}
 
 	private String getPlainCsvFromEncryptedCredentialFile(UploadedFile inputFile, String senderPublicKey) {
@@ -54,26 +61,26 @@ public class ImportCredentialService {
 		return decryptedTextWithAnotherUserKey;
 	}
 	
-	private void importCrendentialsFromCsv(String csv) {
-		if(validateHashFromCsv(csv)) {
-			String[] csvLines = csv.split("\n");
-			
-			for (int i = 0; i < csvLines.length - 1; i++) {
-				String[] credentialData = csvLines[i].split(";");
-				Credential credential = new Credential();
-				Password password = new Password();
-
-				credential.setSystem(credentialData[0]);
-				credential.setLogin(credentialData[1]);
-				password.setPassword(credentialData[2]);
-				credential.setPassword(password);
-	
-				importCredential(credential);
-			}
+	private void importCrendentialsFromCsv(String csv, boolean withHash) {
+		String[] csvLines = csv.split("\n");
 		
-		} else {
-			System.out.println("O arquivo a ser importado não é o mesmo arquivo que foi enviado.");
+		int aux = 0;
+		if(withHash)
+			aux++;
+		
+		for (int i = 0; i < csvLines.length - aux; i++) {
+			String[] credentialData = csvLines[i].split(";");
+			Credential credential = new Credential();
+			Password password = new Password();
+
+			credential.setSystem(credentialData[0]);
+			credential.setLogin(credentialData[1]);
+			password.setPassword(credentialData[2]);
+			credential.setPassword(password);
+
+			importCredential(credential);
 		}
+	
 	}
 
 	public boolean validateHashFromCsv(String csv) {
@@ -98,5 +105,17 @@ public class ImportCredentialService {
 		credential.setPassword(passwordService.getPasswordWithEncryptedKeys(credential.getPassword().getPassword()));
 		credentialService.saveOrUpdate(credential);
 	}
+	
+	public void restoreBackupFile(UploadedFile inputFile) {
+		String cryptedText = null;
+		try {
+			cryptedText = new BufferedReader(new InputStreamReader(inputFile.getFile())).readLine();
+			importCrendentialsFromCsv(tripleDES.decrypt(cryptedText, session.getLoggedUser().getPassword().getTripleDesKey()), false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 }
